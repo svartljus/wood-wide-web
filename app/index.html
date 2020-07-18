@@ -1,0 +1,80 @@
+<html>
+    <head>
+        <script src="/socket.io/socket.io.js"></script>
+        <style>
+            body {
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr 1fr;
+            }
+            fieldset {
+                padding: 2rem;
+                column-count: 5;
+                box-sizing: border-box;
+            }
+
+            fieldset fieldset {
+                margin: 2rem 0;
+            }
+        </style>
+    </head>
+    <body>
+        <script>
+            var socket = io()
+
+            socket.on('fixtures', fixtures => {
+                document.body.innerHTML = ''
+                for (key in fixtures) {
+                    let fixture = fixtures[key]
+                    let fixtureId = key
+                    let fieldset = $('fieldset', document.body)
+                    let legend = $('legend', fieldset)
+                    fieldset.id = key
+                    legend.textContent = fixtureId
+
+                    for (key in fixture) {
+                        let prop = fixture[key]
+                        if (prop[Object.keys(prop)[0]] instanceof Object) {
+                            let layerId = key
+                            let fieldset2 = $('fieldset', fieldset)
+                            let legend2 = $('legend', fieldset2)
+                            fieldset2.id = key
+                            legend2.textContent = layerId
+                            for (key in prop) {
+                                let el = Input(key, prop[key], fixtureId + '/' + layerId)
+                                fieldset2.appendChild(el)
+                            }
+                        } else {
+                            let el = Input(key, prop, fixtureId)
+                            fieldset.appendChild(el)
+                        }
+                    }
+                }
+            })
+
+            function $(type, parent = null) {
+                let el = document.createElement(type)
+                if (parent !== null) {
+                    parent.appendChild(el)
+                }
+                return el
+            }
+
+            function Input(name, data, addr) {
+                let div = $('div')
+                let label = $('label', div)
+                let input = $('input', div)
+                label.textContent = name
+                label.setAttribute('for', name)
+                input.name = name
+                input.type = 'range'
+                input.setAttribute('min', data.min)
+                input.setAttribute('max', data.max)
+                input.setAttribute('step', data.step || data.max / 10)
+                input.addEventListener('change', function () {
+                    socket.emit('update', { addr: `/${addr}/${name}`, val: input.value })
+                })
+                return div
+            }
+        </script>
+    </body>
+</html>

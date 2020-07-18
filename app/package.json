@@ -5,6 +5,8 @@
     "description": "",
     "main": "main.js",
     "dependencies": {
-        "osc": "^2.4.1"
+        "express": "^4.17.1",
+        "osc": "^2.4.1",
+        "socket.io": "^2.3.0"
     }
 }
