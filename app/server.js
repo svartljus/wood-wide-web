@@ -25,7 +25,7 @@ http.listen(3000, function () {
 */
 
 const numFixtures = 2
-const numLayers = 2
+const numLayers = 4
 
 const defaultObject = function () {
     return {

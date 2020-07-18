@@ -1,88 +1,11 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
     <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
         <script src="/socket.io/socket.io.js"></script>
-        <style>
-            body {
-                display: grid;
-                grid-template-columns: 1fr 1fr 1fr 1fr;
-            }
-            fieldset {
-                padding: 2rem;
-                column-count: 5;
-                box-sizing: border-box;
-            }
-
-            fieldset fieldset {
-                margin: 2rem 0;
-            }
-        </style>
+        <script src="app.js"></script>
+        <link rel="stylesheet" href="style.css" />
     </head>
-    <body>
-        <script>
-            var socket = io()
-
-            socket.on('fixtures', fixtures => {
-                document.body.innerHTML = ''
-
-                // for each fixture
-
-                for (fixtureKey in fixtures) {
-
-                    // create fixture fieldset 
-                    let fixture = fixtures[fixtureKey]
-                    let fixtureFieldset = $('fieldset', document.body)
-                    let fixtureLegend = $('legend', fixtureFieldset)
-                    fixtureLegend.textContent = fixtureKey
-
-                    // for each object
-                    
-                    for (objectKey in fixture) {
-                        let prop = fixture[objectKey]
-
-                        // check if first value pair is an object
-                        if (prop[Object.keys(prop)[0]] instanceof Object) {
-
-                            // create layer fieldset
-                            let layerFieldset = $('fieldset', fixtureFieldset)
-                            let layerLegend = $('legend', layerFieldset)
-                            layerLegend.textContent = objectKey
-
-                            for (key in prop) {
-                                let el = Input(key, prop[key], fixtureKey + '/' + objectKey)
-                                layerFieldset.appendChild(el)
-                            }
-                        } else {
-                            let el = Input(objectKey, prop, fixtureKey)
-                            fixtureFieldset.appendChild(el)
-                        }
-                    }
-                }
-            })
-
-            function $(type, parent = null) {
-                let el = document.createElement(type)
-                if (parent !== null) {
-                    parent.appendChild(el)
-                }
-                return el
-            }
-
-            function Input(name, data, addr) {
-                let div = $('div')
-                let label = $('label', div)
-                let input = $('input', div)
-                label.textContent = name
-                label.setAttribute('for', name)
-                input.name = name
-                input.type = 'range'
-                input.setAttribute('min', data.min)
-                input.setAttribute('max', data.max)
-                input.setAttribute('step', data.step || data.max / 10)
-                input.addEventListener('change', function () {
-                    socket.emit('update', { addr: `/${addr}/${name}`, val: input.value })
-                })
-                return div
-            }
-        </script>
-    </body>
+    <body></body>
 </html>

@@ -1,0 +1,46 @@
+* {
+    margin: 0;
+    /* border: 0; */
+    padding: 0;
+}
+
+body {
+    font-family: sans-serif;
+    padding: 1rem;
+}
+
+body > fieldset:not(:last-child) {
+    margin-bottom: 2rem;
+}
+
+fieldset {
+    padding: 1rem;
+    column-count: 5;
+    box-sizing: border-box;
+}
+
+fieldset fieldset:not(:last-child) {
+    margin: 2rem 0;
+}
+
+fieldset div {
+    display: grid;
+    grid-template-columns: 0.5fr 1.5fr;
+}
+
+legend {
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+label {
+    text-transform: capitalize;
+}
+
+input {
+    width: 100%;
+}
+
+body > fieldset:nth-of-type(odd) {
+    background-color: #eee;
+}
