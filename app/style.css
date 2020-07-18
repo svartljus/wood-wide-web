@@ -6,7 +6,7 @@
 
 body {
     font-family: sans-serif;
-    padding: 1rem;
+    padding: 0.5rem;
 }
 
 body > fieldset:not(:last-child) {
@@ -14,13 +14,13 @@ body > fieldset:not(:last-child) {
 }
 
 fieldset {
-    padding: 1rem;
+    padding: 0.5rem;
     column-count: 5;
     box-sizing: border-box;
 }
 
 fieldset fieldset:not(:last-child) {
-    margin: 2rem 0;
+    margin: 1rem 0;
 }
 
 fieldset div {
@@ -42,5 +42,5 @@ input {
 }
 
 body > fieldset:nth-of-type(odd) {
-    background-color: #eee;
+    /* background-color: #fafafa; */
 }

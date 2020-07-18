@@ -1,7 +1,7 @@
 var socket = io()
 
 socket.on('fixtures', fixtures => {
-    document.body.innerHTML = ''
+    // document.body.innerHTML = ''
 
     // for each fixture
 
@@ -54,6 +54,7 @@ function Input(name, data, addr) {
     input.type = 'range'
     input.setAttribute('min', data.min)
     input.setAttribute('max', data.max)
+    input.setAttribute('list', 'tickmarks')
     input.setAttribute('step', data.step || data.max / 10)
     input.addEventListener('change', function () {
         socket.emit('update', { addr: `/${addr}/${name}`, val: input.value })

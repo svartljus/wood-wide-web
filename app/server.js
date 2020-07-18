@@ -30,9 +30,9 @@ const numLayers = 4
 const defaultObject = function () {
     return {
         min: 0,
-        max: 1,
-        val: 0.5,
-        step: 0.1,
+        max: 100,
+        val: 50,
+        step: 10,
         type: 'f'
     }
 }
