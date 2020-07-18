@@ -7,6 +7,8 @@
 body {
     font-family: sans-serif;
     padding: 0.5rem;
+    width: 100vw;
+    box-sizing: border-box;
 }
 
 body > fieldset:not(:last-child) {
@@ -15,7 +17,6 @@ body > fieldset:not(:last-child) {
 
 fieldset {
     padding: 0.5rem;
-    column-count: 5;
     box-sizing: border-box;
 }
 
@@ -35,6 +36,12 @@ legend {
 
 label {
     text-transform: capitalize;
+}
+
+label,
+input {
+    padding: 1rem 0;
+    box-sizing: border-box;
 }
 
 input {

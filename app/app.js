@@ -52,10 +52,11 @@ function Input(name, data, addr) {
     label.setAttribute('for', name)
     input.name = name
     input.type = 'range'
-    input.setAttribute('min', data.min)
-    input.setAttribute('max', data.max)
+    input.value = data.val
+    input.setAttribute('min', data.min || 0)
+    input.setAttribute('max', data.max || 100)
     input.setAttribute('list', 'tickmarks')
-    input.setAttribute('step', data.step || data.max / 10)
+    input.setAttribute('step', data.step || 10)
     input.addEventListener('change', function () {
         socket.emit('update', { addr: `/${addr}/${name}`, val: input.value })
     })

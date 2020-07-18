@@ -32,8 +32,8 @@ const defaultObject = function () {
         min: 0,
         max: 100,
         val: 50,
-        step: 10,
-        type: 'f'
+        step: 10
+        // type: 'f'
     }
 }
 
@@ -75,7 +75,7 @@ io.on('connection', function (socket) {
             address: msg.addr, //'/composition/master',
             args: new Array({
                 type: 'f',
-                value: msg.val
+                value: msg.val / 100 // convert int to fraction
             })
         }
         console.log(message)
