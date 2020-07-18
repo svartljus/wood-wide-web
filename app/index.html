@@ -23,29 +23,37 @@
 
             socket.on('fixtures', fixtures => {
                 document.body.innerHTML = ''
-                for (key in fixtures) {
-                    let fixture = fixtures[key]
-                    let fixtureId = key
-                    let fieldset = $('fieldset', document.body)
-                    let legend = $('legend', fieldset)
-                    fieldset.id = key
-                    legend.textContent = fixtureId
 
-                    for (key in fixture) {
-                        let prop = fixture[key]
+                // for each fixture
+
+                for (fixtureKey in fixtures) {
+
+                    // create fixture fieldset 
+                    let fixture = fixtures[fixtureKey]
+                    let fixtureFieldset = $('fieldset', document.body)
+                    let fixtureLegend = $('legend', fixtureFieldset)
+                    fixtureLegend.textContent = fixtureKey
+
+                    // for each object
+                    
+                    for (objectKey in fixture) {
+                        let prop = fixture[objectKey]
+
+                        // check if first value pair is an object
                         if (prop[Object.keys(prop)[0]] instanceof Object) {
-                            let layerId = key
-                            let fieldset2 = $('fieldset', fieldset)
-                            let legend2 = $('legend', fieldset2)
-                            fieldset2.id = key
-                            legend2.textContent = layerId
+
+                            // create layer fieldset
+                            let layerFieldset = $('fieldset', fixtureFieldset)
+                            let layerLegend = $('legend', layerFieldset)
+                            layerLegend.textContent = objectKey
+
                             for (key in prop) {
-                                let el = Input(key, prop[key], fixtureId + '/' + layerId)
-                                fieldset2.appendChild(el)
+                                let el = Input(key, prop[key], fixtureKey + '/' + objectKey)
+                                layerFieldset.appendChild(el)
                             }
                         } else {
-                            let el = Input(key, prop, fixtureId)
-                            fieldset.appendChild(el)
+                            let el = Input(objectKey, prop, fixtureKey)
+                            fixtureFieldset.appendChild(el)
                         }
                     }
                 }
