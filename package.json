@@ -1,0 +1,10 @@
+{
+    "name": "svartljus",
+    "productName": "Svartljus",
+    "version": "1.0.0",
+    "description": "",
+    "main": "main.js",
+    "dependencies": {
+        "osc": "^2.4.1"
+    }
+}
