@@ -1,5 +1,10 @@
 var socket = io()
 
+socket.on('lights', lights => {
+    // document.body.innerHTML = ''
+    console.log('lights', lights);
+})
+
 socket.on('fixtures', fixtures => {
     // document.body.innerHTML = ''
 
