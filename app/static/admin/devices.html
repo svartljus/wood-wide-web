@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="devices.js"></script>
+        <link rel="stylesheet" href="/style2.css" />
+    </head>
+    <body>
+        <h1><a href="index.html">Admin</a> / Manage devices</h1>
+
+        <nav>
+            <a href="globals.html">Global settings</a>
+            |
+            <a href="effects.html">Effect settings</a>
+            |
+            <b>Device setup</b>
+        </nav>
+
+        <p>
+            <button data-action="sync">Restart all clocks</button>
+        </p>
+
+        <ul class="devices" id="devices"></ul>
+    </body>
+</html>
