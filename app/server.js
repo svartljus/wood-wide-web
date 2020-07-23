@@ -1,10 +1,23 @@
-const express = require('express')
-const app = express()
-const http = require('http').createServer(app)
-const io = require('socket.io')(http)
-var osc = require('osc')
+import { Fixture } from './lib/fixture.js'
+import express from 'express'
+import socketIoModule from 'socket.io'
+import osc from 'osc'
+import { isNullOrUndefined } from 'util'
+import httpmodule from 'http'
+import { FixtureDiscovery } from './lib/fixtureDiscovery.js'
 
-app.use('/', express.static(__dirname))
+const app = express()
+const http = httpmodule.createServer(app)
+const io = socketIoModule(http)
+
+const fixtureDiscovery = new FixtureDiscovery()
+
+fixtureDiscovery.on('fixtures-changed', list => {
+    console.log('Fixture list changed', list);
+    io.emit('fixtures', list)
+})
+
+app.use('/', express.static('./static'))
 
 var udpPort = new osc.UDPPort({
     localAddress: '0.0.0.0',
@@ -61,14 +74,46 @@ for (let i = 0; i < numFixtures; i++) {
     fixtures[`fixture${i}`] = fixtureObject
 }
 
-/* 
+/*
     Socket Logic
 */
 
 io.on('connection', function (socket) {
     console.log('socket connected')
 
-    socket.emit('fixtures', fixtures)
+    socket.emit('fixtures', fixtureDiscovery.getList())
+
+    socket.on('set-fixture-property', msg => {
+        console.log('set fixture property', msg)
+
+        const fixture = fixtureDiscovery.getFixture(msg.fixture)
+        console.log('Found fixture', fixture)
+        if (fixture) {
+            if (msg.prop) {
+                fixture.setProp(msg.prop, ~~msg.value, fixtureDiscovery)
+            }
+            if (msg.nodeprop) {
+                fixture[msg.nodeprop] = msg.value
+            }
+        }
+    })
+
+    socket.on('call-action', msg => {
+        console.log('call action', msg)
+
+        if (msg.fixture) {
+
+        }
+
+        if (msg.action === 'sync') {
+            var message = {
+                address: '/sync', //'/composition/master',
+                args: []
+            }
+            console.log(message)
+            udpPort.send(message, '192.168.2.255', 9000)
+        }
+    })
 
     socket.on('update', msg => {
         var message = {
@@ -81,4 +126,12 @@ io.on('connection', function (socket) {
         console.log(message)
         udpPort.send(message, '127.0.0.1', 7001)
     })
+
+    socket.on('fetch-config', msg => {
+        console.log('fetch config for device', msg);
+    });
 })
+
+
+
+fixtureDiscovery.start()
