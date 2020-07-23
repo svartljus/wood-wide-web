@@ -3,8 +3,8 @@ var socket = io()
 let all_fixtures = null
 
 const DEVICE_HTML = `
-    <h2>Fixture #0 "esp-lights-A137A8"</h2>
-    <p>IP: <b><span data-nodeprop="address"></span></b> - Uptime: <b><span data-prop="_uptime"></span> ms</b> - <button id="" data-action="fetch-config">fetch state</button></p>
+    <h2><span data-nodeprop="id"></span></h2>
+    <p>Fixture IP: <b><span data-nodeprop="address"></span></b> - Uptime: <b><span data-prop="_uptime"></span> ms</b> - <button id="" data-action="fetch-config">fetch state</button></p>
     <p>
         Display name: <input type="text" data-nodeprop="displayname"></input>
     </p>
