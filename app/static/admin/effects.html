@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="effects.js"></script>
+        <link rel="stylesheet" href="/style2.css" />
+    </head>
+    <body>
+        <h1><a href="index.html">Admin</a> | Effect settings</h1>
+
+        <nav>
+            <a href="globals.html">Global settings</a>
+            |
+            <b>Effect settings</b>
+            |
+            <a href="devices.html">Device setup</a>
+        </nav>
+
+        <p>
+            Load settings from device:
+            <select id="load-from-device"></select>
+            <button id="load-from-selected-device">Load</button>
+        </p>
+
+        <p>
+            Send changes to:
+            <label>
+                <input type="checkbox" id="all-devices" /> All devices
+            </label>
+            <br/>
+
+            Specific devices:
+            <ul id="apply-to-device"></ul>
+        </p>
+
+        <p>
+            <button id="sync">Restart all clocks</button>
+        </p>
+
+        <h2>Default visual</h2>
+
+        <table>
+            <tr>
+                <td>Global</td>
+                <td>
+                    <p>
+                        Base speed:<br/>
+                        <input type="range" min="0" max="100000" id="base-speed"></input>
+                        <span data-label-for="base-speed">3.1 rpm</span><br/>
+                    </p>
+                </td>
+
+                <td>
+                    <p>
+                        Master opacity:<br/>
+                        <input type="range" min="0" max="100" id="opacity"></input>
+                        <span data-label-for="opacity">100%</span><br/>
+                    </p>
+                </td>
+
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>
+
+                </td>
+                <td>
+                    <b>Layer 1</b>
+                </td>
+                <td>
+                    <b>Layer 2</b>
+                </td>
+                <td>
+                    <b>Layer 3</b>
+                </td>
+                <td>
+                    <b>Layer 4</b>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Color:
+                </td>
+                <td>
+                    <input type="color" id="layer1-color" />
+                </td>
+                <td>
+                    <input type="color" id="layer2-color" />
+                </td>
+                <td>
+                    <input type="color" id="layer3-color" />
+                </td>
+                <td>
+                    <input type="color" id="layer4-color" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Opacity:
+                </td>
+                <td>
+                    <input type="range" id="layer1-opacity" min="0" max="100"></input> <span data-label-for="layer1-opacity">0</span>
+                </td>
+                <td>
+                    <input type="range" id="layer2-opacity" min="0" max="100"></input> <span data-label-for="layer2-opacity">+10%</span>
+                </td>
+                <td>
+                    <input type="range" id="layer3-opacity" min="0" max="100"></input> <span data-label-for="layer3-opacity">+50%</span>
+                </td>
+                <td>
+                    <input type="range" id="layer4-opacity" min="0" max="100"></input> <span data-label-for="layer4-opacity">+66%</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Speed multiplier:<br/>
+                </td>
+                <td>
+                    <input type="range" id="layer1-speed" min="1" max="10000"></input> <span data-label-for="layer1-speed">3 x</span>
+                </td>
+                <td>
+                    <input type="range" id="layer2-speed" min="1" max="10000"></input> <span data-label-for="layer2-speed">3 x</span>
+                </td>
+                <td>
+                    <input type="range" id="layer3-speed" min="1" max="10000"></input> <span data-label-for="layer3-speed">3 x</span>
+                </td>
+                <td>
+                    <input type="range" id="layer4-speed" min="1" max="10000"></input> <span data-label-for="layer4-speed">3 x</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Offset:
+                </td>
+                <td>
+                    <input type="range" id="layer1-offset" min="0" max="100"></input> <span data-label-for="layer1-offset">0</span>
+                </td>
+                <td>
+                    <input type="range" id="layer2-offset" min="0" max="100"></input> <span data-label-for="layer2-offset">+10%</span>
+                </td>
+                <td>
+                    <input type="range" id="layer3-offset" min="0" max="100"></input> <span data-label-for="layer3-offset">+50%</span>
+                </td>
+                <td>
+                    <input type="range" id="layer4-offset" min="0" max="100"></input> <span data-label-for="layer4-offset">+66%</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Repeat:
+                </td>
+                <td>
+                    <input type="range" id="layer1-repeat" min="1" max="20"></input> <span data-label-for="layer1-repeat">1x</span>
+                </td>
+                <td>
+                    <input type="range" id="layer2-repeat" min="1" max="20"></input> <span data-label-for="layer2-repeat">3x</span>
+                </td>
+                <td>
+                    <input type="range" id="layer3-repeat" min="1" max="20"></input> <span data-label-for="layer3-repeat">7x</span>
+                </td>
+                <td>
+                    <input type="range" id="layer4-repeat" min="1" max="20"></input> <span data-label-for="layer4-repeat">16x</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Size:
+                </td>
+                <td>
+                    <input type="range" id="layer1-size" min="0" max="100"></input> <span data-label-for="layer1-size">1%</span>                    
+                </td>
+                <td>
+                    <input type="range" id="layer2-size" min="0" max="100"></input> <span data-label-for="layer2-size">3%</span>
+                </td>
+                <td>
+                    <input type="range" id="layer3-size" min="0" max="100"></input> <span data-label-for="layer3-size">7%</span>
+                </td>
+                <td>
+                    <input type="range" id="layer4-size" min="0" max="100"></input> <span data-label-for="layer4-size">16%</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Feather left:
+                </td>
+                <td>
+                    <input type="range" id="layer1-feather1" min="0" max="100"></input> <span data-label-for="layer1-feather1">1%</span>
+                </td>
+                <td>
+                    <input type="range" id="layer2-feather1" min="0" max="100"></input> <span data-label-for="layer2-feather1">3%</span>
+                </td>
+                <td>
+                    <input type="range" id="layer3-feather1" min="0" max="100"></input> <span data-label-for="layer3-feather1">7%</span>
+                </td>
+                <td>
+                    <input type="range" id="layer4-feather1" min="0" max="100"></input> <span data-label-for="layer4-feather1">16%</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Feather right:
+                </td>
+                <td>
+                    <input type="range" id="layer1-feather2" min="0" max="100"></input> <span data-label-for="layer1-feather2">1%</span>
+                </td>
+                <td>
+                    <input type="range" id="layer2-feather2" min="0" max="100"></input> <span data-label-for="layer2-feather2">3%</span>
+                </td>
+                <td>
+                    <input type="range" id="layer3-feather2" min="0" max="100"></input> <span data-label-for="layer3-feather2">7%</span>
+                </td>
+                <td>
+                    <input type="range" id="layer4-feather2" min="0" max="100"></input> <span data-label-for="layer4-feather2">16%</span>
+                </td>
+            </tr>
+        </table>
+
+        <p>
+            Preset code: (copy/paste for presets)
+            <button id="load-from-preset">Load from textbox</button>
+            <br/>
+            <textarea id="presetcode" cols="60" rows="5">{"a":3}</textarea><br/>
+        </p>
+
+        <p>
+            <button id="send-all-props">Send all props</button>
+        </p>
+
+        <h3>Example presets</h3>
+
+            <ul class="presets">
+                <textarea cols="90" rows="20">
+
+# Preset: Police brutality disco
+
+{"layer1/red":255,"layer1/green":0,"layer1/blue":0,"layer2/red":0,"layer2/green":64,"layer2/blue":255,"layer3/red":0,"layer3/green":255,"layer3/blue":42,"layer4/red":0,"layer4/green":0,"layer4/blue":0,"basespeed":70478,"opacity":100,"layer1/speed":970,"layer2/speed":2086,"layer3/speed":1,"layer4/speed":5001,"layer1/opacity":100,"layer2/opacity":100,"layer3/opacity":100,"layer4/opacity":100,"layer1/offset":100000,"layer2/offset":0,"layer3/offset":50000,"layer4/offset":50000,"layer1/repeat":1,"layer2/repeat":2,"layer3/repeat":4,"layer4/repeat":11,"layer1/size":25,"layer2/size":0,"layer3/size":5,"layer4/size":50,"layer1/feather1":28,"layer2/feather1":0,"layer3/feather1":22,"layer4/feather1":50,"layer1/feather2":40,"layer2/feather2":27,"layer3/feather2":20,"layer4/feather2":50}
+
+
+
+# Preset: Slow rainbow
+
+{"_random":10134,"layer1/red":220,"layer1/green":0,"layer1/blue":0,"layer2/red":0,"layer2/green":64,"layer2/blue":255,"layer3/red":0,"layer3/green":255,"layer3/blue":0,"layer4/red":0,"layer4/green":0,"layer4/blue":0,"basespeed":11988,"opacity":100,"layer1/speed":1000,"layer2/speed":1000,"layer3/speed":1000,"layer4/speed":1000,"layer1/opacity":100,"layer2/opacity":100,"layer3/opacity":100,"layer4/opacity":100,"layer1/offset":0,"layer2/offset":32,"layer3/offset":66,"layer4/offset":100,"layer1/repeat":1,"layer2/repeat":1,"layer3/repeat":1,"layer4/repeat":11,"layer1/size":9,"layer2/size":10,"layer3/size":9,"layer4/size":50,"layer1/feather1":27,"layer2/feather1":23,"layer3/feather1":30,"layer4/feather1":50,"layer1/feather2":31,"layer2/feather2":30,"layer3/feather2":35,"layer4/feather2":50}
+
+
+
+# R G B Lines
+
+{"layer1/red":220,"layer1/green":0,"layer1/blue":0,"layer2/red":0,"layer2/green":64,"layer2/blue":255,"layer3/red":0,"layer3/green":255,"layer3/blue":0,"layer4/red":0,"layer4/green":0,"layer4/blue":0,"basespeed":34513,"opacity":100,"layer1/speed":1000,"layer2/speed":1000,"layer3/speed":1000,"layer4/speed":1000,"layer1/opacity":100,"layer2/opacity":100,"layer3/opacity":7,"layer4/opacity":0,"layer1/offset":0,"layer2/offset":33,"layer3/offset":67,"layer4/offset":0,"layer1/repeat":1,"layer2/repeat":1,"layer3/repeat":1,"layer4/repeat":1,"layer1/size":25,"layer2/size":0,"layer3/size":5,"layer4/size":50,"layer1/feather1":28,"layer2/feather1":0,"layer3/feather1":22,"layer4/feather1":50,"layer1/feather2":40,"layer2/feather2":27,"layer3/feather2":20,"layer4/feather2":50}
+
+
+
+# Blue yellow flow
+
+{"layer1/red":0,"layer1/green":136,"layer1/blue":255,"layer2/red":255,"layer2/green":234,"layer2/blue":0,"layer3/red":0,"layer3/green":0,"layer3/blue":0,"layer4/red":0,"layer4/green":0,"layer4/blue":0,"basespeed":1341,"opacity":100,"layer1/speed":2892,"layer2/speed":7145,"layer3/speed":2535,"layer4/speed":1000,"layer1/opacity":89,"layer2/opacity":100,"layer3/opacity":0,"layer4/opacity":100,"layer1/offset":4,"layer2/offset":0,"layer3/offset":100,"layer4/offset":100,"layer1/repeat":6,"layer2/repeat":3,"layer3/repeat":4,"layer4/repeat":11,"layer1/size":0,"layer2/size":10,"layer3/size":5,"layer4/size":50,"layer1/feather1":48,"layer2/feather1":29,"layer3/feather1":22,"layer4/feather1":50,"layer1/feather2":46,"layer2/feather2":34,"layer3/feather2":20,"layer4/feather2":50}
+
+
+                </textarea>
+            </ul>
+        </ul>
+    </body>
+</html>

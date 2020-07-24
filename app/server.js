@@ -86,24 +86,34 @@ io.on('connection', function (socket) {
     socket.on('set-fixture-property', msg => {
         console.log('set fixture property', msg)
 
-        const fixture = fixtureDiscovery.getFixture(msg.fixture)
-        console.log('Found fixture', fixture)
-        if (fixture) {
-            if (msg.prop) {
-                fixture.setProp(msg.prop, ~~msg.value, fixtureDiscovery)
+        if (msg.fixture) {
+            const fixture = fixtureDiscovery.getFixture(msg.fixture)
+            console.log('Found fixture', fixture)
+            if (fixture) {
+                if (msg.prop) {
+                    fixture.setProp(msg.prop, ~~msg.value, fixtureDiscovery)
+                }
+                if (msg.nodeprop) {
+                    fixture[msg.nodeprop] = msg.value
+                }
             }
-            if (msg.nodeprop) {
-                fixture[msg.nodeprop] = msg.value
+        }
+        else if (msg.broadcast) {
+            if (msg.prop) {
+                var message = {
+                    address: '/' + msg.prop,
+                    args: [{
+                        type: 'f',
+                        value: msg.value
+                    }]
+                }
+                udpPort.send(message, '192.168.2.255', 9000)
             }
         }
     })
 
     socket.on('call-action', msg => {
         console.log('call action', msg)
-
-        if (msg.fixture) {
-
-        }
 
         if (msg.action === 'sync') {
             var message = {
