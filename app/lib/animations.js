@@ -16,6 +16,7 @@ export class Animations {
     }
 
     queue(animator) {
+        // TODO: Do not animates same property at the same time
         this.animators.push(animator)
     }
 }

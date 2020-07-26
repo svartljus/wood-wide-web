@@ -14,6 +14,17 @@ export class Animator {
 
     interpolator(progress, type) {
         // Default, falling ramp
+        if (type === 'sine') {
+            const sinramp = Math.sin(progress * Math.PI)
+            return sinramp
+        }
+
+        if (type === 'fastlfo') {
+            const sinramp = Math.sin(progress * Math.PI)
+            const fastlfo = (0.5 + 0.5 * Math.sin(progress * 15.0 * Math.PI)) * sinramp
+            return fastlfo
+        }
+
         return 1.0 - progress
     }
 

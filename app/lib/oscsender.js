@@ -14,7 +14,9 @@ export class OSCSender {
             remoteAddress: "192.168.2.255", // the other laptop
             remotePort: 9000,
         })
+
         this.oscPort.open()
+
         this.oscPort.on('ready', () => {
             console.log('OSC port open.')
         })
@@ -43,6 +45,6 @@ export class OSCSender {
             }
         }
 
-        setTimeout(this.popQueueAndWait.bind(this), item ? 15 : 50); // Send next message in a bit, if queue is empty, relax a bit more
+        setTimeout(this.popQueueAndWait.bind(this), item ? 2 : 25); // Send next message in a bit, if queue is empty, relax a bit more
     }
 }

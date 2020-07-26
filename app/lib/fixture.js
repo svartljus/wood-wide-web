@@ -1,11 +1,11 @@
 import fetch from 'node-fetch'
 
 export class Fixture {
-    constructor() {
-        this.id = ''
+    constructor(id, addr) {
+        this.id = id || ''
         this.fqdn = ''
-        this.address = ''
-        this.displayname = ''
+        this.address = addr || ''
+        this.displayname = id || ''
         this.props = []
         this.dirty = false
     }
@@ -42,5 +42,9 @@ export class Fixture {
             console.log('Sending OSC message', message)
             oscSender.send(message, this.address)
         }
+    }
+
+    getProp(prop, defaultValue = 0) {
+        return typeof(this.props[prop]) !== 'undefined' ? this.props[prop] : defaultValue
     }
 }

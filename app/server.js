@@ -28,46 +28,46 @@ http.listen(port, function () {
     console.log(`listening on *:${port}`)
 })
 
-/*
-Fixtures: Resets on reboot, not written to file
-*/
+// /*
+// Fixtures: Resets on reboot, not written to file
+// */
 
-const numFixtures = 2
-const numLayers = 4
+// const numFixtures = 2
+// const numLayers = 4
 
-const defaultObject = function () {
-    return {
-        min: 0,
-        max: 100,
-        val: 50,
-        step: 10
-        // type: 'f'
-    }
-}
+// const defaultObject = function () {
+//     return {
+//         min: 0,
+//         max: 100,
+//         val: 50,
+//         step: 10
+//         // type: 'f'
+//     }
+// }
 
-const fixtures = {}
+// const fixtures = {}
 
-for (let i = 0; i < numFixtures; i++) {
-    const fixtureObject = {
-        length: new defaultObject(),
-        nudge: new defaultObject()
-    }
+// for (let i = 0; i < numFixtures; i++) {
+//     const fixtureObject = {
+//         length: new defaultObject(),
+//         nudge: new defaultObject()
+//     }
 
-    for (let j = 0; j < numLayers; j++) {
-        const layerObject = {
-            red: new defaultObject(),
-            green: new defaultObject(),
-            blue: new defaultObject(),
-            radius: new defaultObject(),
-            feather_left: new defaultObject(),
-            feather_right: new defaultObject(),
-            speed: new defaultObject(),
-            repeat: new defaultObject()
-        }
-        fixtureObject[`layer${j}`] = layerObject
-    }
-    fixtures[`fixture${i}`] = fixtureObject
-}
+//     for (let j = 0; j < numLayers; j++) {
+//         const layerObject = {
+//             red: new defaultObject(),
+//             green: new defaultObject(),
+//             blue: new defaultObject(),
+//             radius: new defaultObject(),
+//             feather_left: new defaultObject(),
+//             feather_right: new defaultObject(),
+//             speed: new defaultObject(),
+//             repeat: new defaultObject()
+//         }
+//         fixtureObject[`layer${j}`] = layerObject
+//     }
+//     fixtures[`fixture${i}`] = fixtureObject
+// }
 
 /*
     Socket Logic
@@ -114,13 +114,25 @@ io.on('connection', function (socket) {
             const message = { address: '/sync', args: [] }
             oscSender.send(message, '192.168.2.255', 9000)
         }
-
     })
 
-    socket.on('test-animation', msg => {
-        const fix = new Fixture() //  fixtureDiscovery.getFixture('fix1')
-        animations.queue(new Animator('fix1', fix, 'prop1', 100, 0, 0, 1000.0))
-        animations.queue(new Animator('fix1', fix, 'prop2', 100, 0, 0, 1500.0))
+    socket.on('animate', msg => {
+        console.log('trigger animation', msg)
+        const fix = fixtureDiscovery.getFixture(msg.fixture)
+        if (fix) {
+            if (msg.animation == 1) {
+                const v0 = fix.getProp('prop1', 0)
+                animations.queue(new Animator(fix.id, fix, 'prop1', v0 + 100, v0, 'down', 1000.0))
+            }
+            if (msg.animation == 2) {
+                const v1 = fix.getProp('prop2', 0)
+               animations.queue(new Animator(fix.id, fix, 'prop2', v1 + 100, v1, 'sine', 3000.0))
+            }
+            if (msg.animation == 3) {
+                const v2 = fix.getProp('prop3', 0)
+                animations.queue(new Animator(fix.id, fix, 'prop2', v2 + 100, v2, 'fastlfo', 3000.0))
+            }
+        }
     })
 
     socket.on('fetch-config', msg => {

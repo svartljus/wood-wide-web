@@ -9,26 +9,28 @@ export class FixtureDiscovery extends EventEmitter {
 
         this.cache = {}
         this.visibleDevices = {}
+        this.mockFixtures = []
+    }
+
+    addMockFixture(f) {
+        this.mockFixtures.push(f)
+    }
+
+    _foundAndMockedDevices() {
+        return [
+            ...this.lightBrowser.services.map(s => this.visibleDevices[s.name] && this.cache[s.name]),
+            ...this.mockFixtures
+        ].filter(t => t)
     }
 
     getList() {
-        return this.lightBrowser.services
-            .map(s => this.visibleDevices[s.name] && this.cache[s.name])
-            .filter(t => t)
+        return this._foundAndMockedDevices()
             .sort((a, b) => a.id.localeCompare(b.id))
     }
 
     getFixture(id) {
-        const svc = this.lightBrowser.services
-            .find(s => s.name === id)
-
-        console.log('svc', this.lightBrowser.services, svc)
-
-        if (svc) {
-            return this.cache[svc.name]
-        }
-
-        return undefined;
+        return this._foundAndMockedDevices()
+            .find(f => f.id === id)
     }
 
     start() {
