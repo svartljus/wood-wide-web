@@ -1,7 +1,6 @@
 import EventEmitter from 'events'
 import Bonjour from 'bonjour'
 import { Fixture } from './fixture.js'
-import osc from 'osc'
 
 export class FixtureDiscovery extends EventEmitter {
 
@@ -28,7 +27,7 @@ export class FixtureDiscovery extends EventEmitter {
         if (svc) {
             return this.cache[svc.name]
         }
-        
+
         return undefined;
     }
 
@@ -74,22 +73,6 @@ export class FixtureDiscovery extends EventEmitter {
 
             this.emit('fixtures-changed', this.getList())
         });
-
-        this.oscPort = new osc.UDPPort({
-            localAddress: "0.0.0.0", // shouldn't matter here
-            localPort: 5000, // not receiving, but here's a port anyway
-            remoteAddress: "192.168.2.255", // the other laptop
-            remotePort: 9000,
-        })
-        this.oscPort.open()
-        this.oscPort.on('ready', () => {
-            console.log('OSC port open.')
-        })
-    }
-
-    sendOSC(message, host, port) {
-        this.oscPort.send(message, host, port || 9000)
-
     }
 
 }

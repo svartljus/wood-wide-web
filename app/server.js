@@ -5,10 +5,12 @@ import osc from 'osc'
 import { isNullOrUndefined } from 'util'
 import httpmodule from 'http'
 import { FixtureDiscovery } from './lib/fixtureDiscovery.js'
+import { OSCSender } from './lib/oscsender.js'
 
 const app = express()
 const http = httpmodule.createServer(app)
 const io = socketIoModule(http)
+const oscSender = new OSCSender()
 
 const fixtureDiscovery = new FixtureDiscovery()
 
@@ -19,23 +21,13 @@ fixtureDiscovery.on('fixtures-changed', list => {
 
 app.use('/', express.static('./static'))
 
-var udpPort = new osc.UDPPort({
-    localAddress: '0.0.0.0',
-    remoteAddress: '0.0.0.0',
-    localPort: 7000,
-    remotePort: 7001,
-    broadcast: true
-})
-
-udpPort.open()
-
 const port = process.env.PORT || 3000
 http.listen(port, function () {
     console.log(`listening on *:${port}`)
 })
 
-/* 
-    Fixtures: Resets on reboot, not written to file
+/*
+Fixtures: Resets on reboot, not written to file
 */
 
 const numFixtures = 2
@@ -121,21 +113,8 @@ io.on('connection', function (socket) {
                 address: '/sync', //'/composition/master',
                 args: []
             }
-            console.log(message)
-            udpPort.send(message, '192.168.2.255', 9000)
+            oscSender.send(message, '192.168.2.255', 9000)
         }
-    })
-
-    socket.on('update', msg => {
-        var message = {
-            address: msg.addr, //'/composition/master',
-            args: new Array({
-                type: 'f',
-                value: msg.val / 100 // convert int to fraction
-            })
-        }
-        console.log(message)
-        udpPort.send(message, '127.0.0.1', 7001)
     })
 
     socket.on('fetch-config', msg => {
@@ -143,6 +122,5 @@ io.on('connection', function (socket) {
     });
 })
 
-
-
+oscSender.start()
 fixtureDiscovery.start()

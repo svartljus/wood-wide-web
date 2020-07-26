@@ -25,7 +25,7 @@ export class Fixture {
         this.dirty = true
     }
 
-    setProp(prop, value, oschandler) {
+    setProp(prop, value, oscSender) {
         console.log('Setting prop ' + prop + ' to value ' + value + ' on fixture ' + this.id + ' (' + this.address + ')')
         this.props[prop] = value
         this.dirty = true
@@ -39,6 +39,6 @@ export class Fixture {
         }
 
         console.log('Sending OSC message', message)
-        oschandler.sendOSC(message, this.address)
+        oscSender.send(message, this.address)
     }
 }
