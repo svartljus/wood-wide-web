@@ -1,16 +1,18 @@
 import { Fixture } from './lib/fixture.js'
 import express from 'express'
 import socketIoModule from 'socket.io'
-import osc from 'osc'
 import { isNullOrUndefined } from 'util'
 import httpmodule from 'http'
 import { FixtureDiscovery } from './lib/fixtureDiscovery.js'
 import { OSCSender } from './lib/oscsender.js'
+import { Animator } from './lib/animator.js'
+import { Animations } from './lib/animations.js'
 
 const app = express()
 const http = httpmodule.createServer(app)
 const io = socketIoModule(http)
 const oscSender = new OSCSender()
+const animations = new Animations(oscSender)
 
 const fixtureDiscovery = new FixtureDiscovery()
 
@@ -84,7 +86,7 @@ io.on('connection', function (socket) {
             console.log('Found fixture', fixture)
             if (fixture) {
                 if (msg.prop) {
-                    fixture.setProp(msg.prop, ~~msg.value, fixtureDiscovery)
+                    fixture.setProp(msg.prop, ~~msg.value, oscSender)
                 }
                 if (msg.nodeprop) {
                     fixture[msg.nodeprop] = msg.value
@@ -100,7 +102,7 @@ io.on('connection', function (socket) {
                         value: msg.value
                     }]
                 }
-                udpPort.send(message, '192.168.2.255', 9000)
+                oscSender.send(message, '192.168.2.255', 9000)
             }
         }
     })
@@ -109,12 +111,16 @@ io.on('connection', function (socket) {
         console.log('call action', msg)
 
         if (msg.action === 'sync') {
-            var message = {
-                address: '/sync', //'/composition/master',
-                args: []
-            }
+            const message = { address: '/sync', args: [] }
             oscSender.send(message, '192.168.2.255', 9000)
         }
+
+    })
+
+    socket.on('test-animation', msg => {
+        const fix = new Fixture() //  fixtureDiscovery.getFixture('fix1')
+        animations.queue(new Animator('fix1', fix, 'prop1', 100, 0, 0, 1000.0))
+        animations.queue(new Animator('fix1', fix, 'prop2', 100, 0, 0, 1500.0))
     })
 
     socket.on('fetch-config', msg => {
@@ -123,4 +129,5 @@ io.on('connection', function (socket) {
 })
 
 oscSender.start()
+animations.start()
 fixtureDiscovery.start()

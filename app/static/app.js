@@ -67,3 +67,12 @@ function Input(name, data, addr) {
     })
     return div
 }
+
+window.addEventListener('load', () => {
+    console.log('loaded')
+    document.getElementById('animtest1').addEventListener('click', () => { socket.emit('test-animation', { id: 1 })})
+    document.getElementById('animtest2').addEventListener('click', () => { socket.emit('test-animation', { id: 2 })})
+    document.getElementById('animtest3').addEventListener('click', () => { socket.emit('test-animation', { id: 3 })})
+    document.getElementById('animtest4').addEventListener('click', () => { socket.emit('test-animation', { id: 4 })})
+    document.getElementById('animtest5').addEventListener('click', () => { socket.emit('test-animation', { id: 5 })})
+})

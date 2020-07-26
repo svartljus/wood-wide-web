@@ -27,18 +27,20 @@ export class Fixture {
 
     setProp(prop, value, oscSender) {
         console.log('Setting prop ' + prop + ' to value ' + value + ' on fixture ' + this.id + ' (' + this.address + ')')
-        this.props[prop] = value
-        this.dirty = true
+        if (value != this.props[prop]) {
+            this.props[prop] = value
+            this.dirty = true
 
-        const message = {
-            address: `/${prop}`,
-            args: [{
-                type: 'f',
-                value,
-            }]
+            const message = {
+                address: `/${prop}`,
+                args: [{
+                    type: 'f',
+                    value,
+                }]
+            }
+
+            console.log('Sending OSC message', message)
+            oscSender.send(message, this.address)
         }
-
-        console.log('Sending OSC message', message)
-        oscSender.send(message, this.address)
     }
 }

@@ -36,7 +36,7 @@ export class OSCSender {
 
         if (item) {
             try {
-                console.log('Sending OSC', item)
+                console.log(`Sending OSC to ${item.host}:${item.port} => ${JSON.stringify(item.message)}`)
                 this.oscPort.send(item.message, item.host, item.port)
             } catch(e) {
                 console.log('Failed to send message', e)
