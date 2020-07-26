@@ -140,6 +140,11 @@ io.on('connection', function (socket) {
     });
 })
 
+// Create some mock fixtures if you dont have any actual lights
+// fixtureDiscovery.addMockFixture(new Fixture('mockfix1', '10.0.0.1'))
+// fixtureDiscovery.addMockFixture(new Fixture('mockfix2', '10.0.0.2'))
+// fixtureDiscovery.addMockFixture(new Fixture('mockfix3', '10.0.0.3'))
+
 oscSender.start()
 animations.start()
 fixtureDiscovery.start()
