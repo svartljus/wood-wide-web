@@ -28,6 +28,11 @@ export class FixtureDiscovery extends EventEmitter {
             .sort((a, b) => a.id.localeCompare(b.id))
     }
 
+    getAllAddresses() {
+        return this._foundAndMockedDevices()
+            .map(f => f.address)
+    }
+
     getFixture(id) {
         return this._foundAndMockedDevices()
             .find(f => f.id === id)

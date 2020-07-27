@@ -102,7 +102,10 @@ io.on('connection', function (socket) {
                         value: msg.value
                     }]
                 }
-                oscSender.send(message, '192.168.2.255', 9000)
+
+                fixtureDiscovery.getAllAddresses().forEach(a => {
+                    oscSender.send(message, a, 9000)
+                })
             }
         }
     })
@@ -112,7 +115,11 @@ io.on('connection', function (socket) {
 
         if (msg.action === 'sync') {
             const message = { address: '/sync', args: [] }
-            oscSender.send(message, '192.168.2.255', 9000)
+
+            fixtureDiscovery.getAllAddresses().forEach(a => {
+                oscSender.send(message, a, 9000)
+            })
+
         }
     })
 
