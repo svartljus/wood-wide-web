@@ -31,6 +31,24 @@ export class OSCSender {
             host,
             port: port || 9000
         })
+
+        this.queue.push({
+            message,
+            host,
+            port: port || 9000
+        })
+
+        this.queue.push({
+            message,
+            host,
+            port: port || 9000
+        })
+
+        this.queue.push({
+            message,
+            host,
+            port: port || 9000
+        })
     }
 
     popQueueAndWait() {
