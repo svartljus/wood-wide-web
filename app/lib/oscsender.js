@@ -63,6 +63,6 @@ export class OSCSender {
             }
         }
 
-        setTimeout(this.popQueueAndWait.bind(this), item ? 2 : 25); // Send next message in a bit, if queue is empty, relax a bit more
+        setTimeout(this.popQueueAndWait.bind(this), item ? 10 : 50); // Send next message in a bit, if queue is empty, relax a bit more
     }
 }
