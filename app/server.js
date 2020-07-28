@@ -121,6 +121,17 @@ io.on('connection', function (socket) {
             })
 
         }
+
+        if (msg.action === 'fetch-config') {
+            const fix = fixtureDiscovery.getFixture(msg.fixture)
+            console.log('fetch config for device', msg, fix);
+
+            if (fix) {
+                fix.fetchProps().then(() => {
+                    socket.emit('fixtures', fixtureDiscovery.getList())
+                })
+            }
+        }
     })
 
     socket.on('animate', msg => {
@@ -142,9 +153,6 @@ io.on('connection', function (socket) {
         }
     })
 
-    socket.on('fetch-config', msg => {
-        console.log('fetch config for device', msg);
-    });
 })
 
 // Create some mock fixtures if you dont have any actual lights
