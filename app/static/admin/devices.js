@@ -13,6 +13,7 @@ const DEVICE_HTML = `
         Strip length:
         <input data-prop="length" type="text" size="5"></input>
         (Skip first <input type="text" data-prop="skip" size="3"></input> leds)
+        <input type="text" data-prop="reverse" size="3"></input>
     </p>
 
     <p>
