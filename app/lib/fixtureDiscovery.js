@@ -25,6 +25,7 @@ export class FixtureDiscovery extends EventEmitter {
 
     getList() {
         return this._foundAndMockedDevices()
+            .filter(t => !t.broken)
             .sort((a, b) => a.id.localeCompare(b.id))
     }
 
@@ -36,6 +37,11 @@ export class FixtureDiscovery extends EventEmitter {
     getFixture(id) {
         return this._foundAndMockedDevices()
             .find(f => f.id === id)
+    }
+
+    getByAddress(address) {
+        return this._foundAndMockedDevices()
+            .find(f => f.address === address)
     }
 
     start() {
@@ -80,6 +86,18 @@ export class FixtureDiscovery extends EventEmitter {
 
             this.emit('fixtures-changed', this.getList())
         });
+
+        setInterval(() => this.tick(), 500);
+    }
+
+    tick() {
+        const anyDirty = this._foundAndMockedDevices().find(t => t.dirty)
+
+        if (anyDirty) {
+            // this.emit('fixtures-changed', this.getList())
+
+            this._foundAndMockedDevices().forEach(t => t.dirty = false)
+        }
     }
 
 }

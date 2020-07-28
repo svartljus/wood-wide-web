@@ -121,6 +121,17 @@ io.on('connection', function (socket) {
             })
 
         }
+
+        if (msg.action === 'fetch-config') {
+            const fix = fixtureDiscovery.getFixture(msg.fixture)
+            console.log('fetch config for device', msg, fix);
+
+            if (fix) {
+                fix.fetchProps().then(() => {
+                    socket.emit('fixtures', fixtureDiscovery.getList())
+                })
+            }
+        }
     })
 
     socket.on('animate', msg => {
@@ -142,15 +153,30 @@ io.on('connection', function (socket) {
         }
     })
 
-    socket.on('fetch-config', msg => {
-        console.log('fetch config for device', msg);
-    });
 })
 
 // Create some mock fixtures if you dont have any actual lights
-// fixtureDiscovery.addMockFixture(new Fixture('mockfix1', '10.0.0.1'))
-// fixtureDiscovery.addMockFixture(new Fixture('mockfix2', '10.0.0.2'))
-// fixtureDiscovery.addMockFixture(new Fixture('mockfix3', '10.0.0.3'))
+
+fixtureDiscovery.addMockFixture(new Fixture('fix.10', '192.168.2.10'))
+fixtureDiscovery.addMockFixture(new Fixture('fix.11', '192.168.2.11'))
+fixtureDiscovery.addMockFixture(new Fixture('fix.12', '192.168.2.12'))
+fixtureDiscovery.addMockFixture(new Fixture('fix.13', '192.168.2.13'))
+fixtureDiscovery.addMockFixture(new Fixture('fix.14', '192.168.2.14'))
+fixtureDiscovery.addMockFixture(new Fixture('fix.15', '192.168.2.15'))
+fixtureDiscovery.addMockFixture(new Fixture('fix.16', '192.168.2.16'))
+fixtureDiscovery.addMockFixture(new Fixture('fix.17', '192.168.2.17'))
+fixtureDiscovery.addMockFixture(new Fixture('fix.18', '192.168.2.18'))
+fixtureDiscovery.addMockFixture(new Fixture('fix.19', '192.168.2.19'))
+fixtureDiscovery.addMockFixture(new Fixture('fix.20', '192.168.2.20'))
+fixtureDiscovery.addMockFixture(new Fixture('fix.21', '192.168.2.21'))
+fixtureDiscovery.addMockFixture(new Fixture('fix.22', '192.168.2.22'))
+fixtureDiscovery.addMockFixture(new Fixture('fix.23', '192.168.2.23'))
+fixtureDiscovery.addMockFixture(new Fixture('fix.24', '192.168.2.24'))
+fixtureDiscovery.addMockFixture(new Fixture('fix.25', '192.168.2.25'))
+fixtureDiscovery.addMockFixture(new Fixture('fix.26', '192.168.2.26'))
+fixtureDiscovery.addMockFixture(new Fixture('fix.27', '192.168.2.27'))
+
+oscSender.fixtureDiscovery = fixtureDiscovery
 
 oscSender.start()
 animations.start()

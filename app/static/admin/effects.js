@@ -101,6 +101,27 @@ const CONTROLS = [
     },
 
     {
+        id: 'layer1-blending',
+        type: 'int',
+        prop: 'layer1/blending',
+    },
+    {
+        id: 'layer2-blending',
+        type: 'int',
+        prop: 'layer2/blending',
+    },
+    {
+        id: 'layer3-blending',
+        type: 'int',
+        prop: 'layer3/blending',
+    },
+    {
+        id: 'layer4-blending',
+        type: 'int',
+        prop: 'layer4/blending',
+    },
+
+    {
         id: 'layer1-offset',
         type: 'int',
         prop: 'layer1/offset',
@@ -464,6 +485,19 @@ function loadFromSelectedDevice() {
     }
 }
 
+function loadFromSelectedDevice2() {
+    const el = document.getElementById('load-from-device')
+    const selid = el.options[el.selectedIndex].value
+    if (selid) {
+        console.log('loadFromSelectedDevice', selid)
+        const fixture = all_fixtures.find(f => f.id === selid)
+        console.log('loadFromSelectedDevice', fixture)
+        if (fixture) {
+            socket.emit('call-action', {action: 'fetch-config', fixture: fixture.id})
+        }
+    }
+}
+
 window.addEventListener('load', () => {
     console.log('loaded.')
 
@@ -488,6 +522,7 @@ window.addEventListener('load', () => {
     document.getElementById('sync').addEventListener('click', sync);
     document.getElementById('send-all-props').addEventListener('click', sendAllProps);
     document.getElementById('load-from-selected-device').addEventListener('click', loadFromSelectedDevice)
+    document.getElementById('load-from-selected-device2').addEventListener('click', loadFromSelectedDevice2)
 
     loadFromPreset('{}', false)
     updateLabels()

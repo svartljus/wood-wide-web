@@ -4,7 +4,7 @@ let all_fixtures = null
 
 const DEVICE_HTML = `
     <h2><span data-nodeprop="id"></span></h2>
-    <p>Fixture IP: <b><span data-nodeprop="address"></span></b> - Uptime: <b><span data-prop="_uptime"></span> ms</b> - <button id="" data-action="fetch-config">fetch state</button></p>
+    <p>Fixture IP: <b><span data-nodeprop="address"></span></b> - Broken: <b><span data-nodeprop="broken"></span></b> - Uptime: <b><span data-prop="_uptime"></span> ms</b> - <button id="" data-action="fetch-config">fetch state</button></p>
     <p>
         Display name: <input type="text" data-nodeprop="displayname"></input>
     </p>
@@ -13,6 +13,7 @@ const DEVICE_HTML = `
         Strip length:
         <input data-prop="length" type="text" size="5"></input>
         (Skip first <input type="text" data-prop="skip" size="3"></input> leds)
+        <input type="text" data-prop="reversed" size="3"></input>
     </p>
 
     <p>
@@ -95,10 +96,10 @@ function setupTemplateFromData(root, data) {
             var ds = combineDataset(i)
             i.addEventListener('change', handleChangeText);
             if (ds.prop) {
-                i.value = data.props[ds.prop];
+                i.value = data.props[ds.prop] || '';
             }
             if (ds.nodeprop) {
-                i.value = data[ds.nodeprop];
+                i.value = data[ds.nodeprop] || '';
             }
         }
     })

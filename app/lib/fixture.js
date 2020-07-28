@@ -7,6 +7,7 @@ export class Fixture {
         this.address = addr || ''
         this.displayname = id || ''
         this.props = []
+        this.broken = false
         this.dirty = false
     }
 
