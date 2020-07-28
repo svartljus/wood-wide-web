@@ -94,7 +94,7 @@ export class FixtureDiscovery extends EventEmitter {
         const anyDirty = this._foundAndMockedDevices().find(t => t.dirty)
 
         if (anyDirty) {
-            this.emit('fixtures-changed', this.getList())
+            // this.emit('fixtures-changed', this.getList())
 
             this._foundAndMockedDevices().forEach(t => t.dirty = false)
         }
