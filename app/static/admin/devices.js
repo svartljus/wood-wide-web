@@ -96,10 +96,10 @@ function setupTemplateFromData(root, data) {
             var ds = combineDataset(i)
             i.addEventListener('change', handleChangeText);
             if (ds.prop) {
-                i.value = data.props[ds.prop];
+                i.value = data.props[ds.prop] || '';
             }
             if (ds.nodeprop) {
-                i.value = data[ds.nodeprop];
+                i.value = data[ds.nodeprop] || '';
             }
         }
     })
