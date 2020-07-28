@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="effects.js"></script>
+        <link rel="stylesheet" href="/style.css" />
+        <script>
+            const queryString = window.location.search
+            const urlParams = new URLSearchParams(queryString)
+            const admin = urlParams.get('admin')
+            if (admin !== null) document.documentElement.id = 'admin'
+        </script>
+    </head>
+    <body>
+        <section admin-only>
+            <nav>
+                <b>Effect settings</b>
+                |
+                <a href="devices.html">Device setup</a>
+            </nav>
+
+            <div>
+                Load settings from device:
+                <select id="load-from-device"></select>
+                <button id="load-from-selected-device">Load</button>
+            </div>
+
+            <div>
+                Send changes to:
+                <label>
+                    <input type="checkbox" id="all-devices" />
+                    All devices
+                </label>
+                <br />
+
+                Specific devices:
+            </div>
+
+            <div>
+                <button id="sync">Restart all clocks</button>
+            </div>
+        </section>
+
+        <section>
+            <div id="devices"></div>
+            <ul id="apply-to-device"></ul>
+            <div id="layers">
+                <button id="layer-1">Layer 1</button>
+                <button id="layer-2">Layer 2</button>
+                <button id="layer-3">Layer 3</button>
+                <button id="layer-4">Layer 4</button>
+            </div>
+            <table>
+                <tr data-group="global" admin-only>
+                    <td>
+                        <input type="range" min="0" max="100000" id="base-speed" />
+                    </td>
+                    <td>
+                        <input type="range" min="0" max="100" id="opacity" />
+                    </td>
+                </tr>
+                <tr data-group="red">
+                    <td>
+                        <input type="range" id="layer1-red" min="0" max="100" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer2-red" min="0" max="100" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer3-red" min="0" max="100" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer4-red" min="0" max="100" />
+                    </td>
+                </tr>
+                <tr data-group="green">
+                    <td>
+                        <input type="range" id="layer1-green" min="0" max="100" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer2-green" min="0" max="100" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer3-green" min="0" max="100" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer4-green" min="0" max="100" />
+                    </td>
+                </tr>
+                <tr data-group="blue">
+                    <td>
+                        <input type="range" id="layer1-blue" min="0" max="100" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer2-blue" min="0" max="100" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer3-blue" min="0" max="100" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer4-blue" min="0" max="100" />
+                    </td>
+                </tr>
+                <tr data-group="opacity">
+                    <td>
+                        <input type="range" id="layer1-opacity" min="0" max="100" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer2-opacity" min="0" max="100" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer3-opacity" min="0" max="100" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer4-opacity" min="0" max="100" />
+                    </td>
+                </tr>
+                <tr data-group="speed">
+                    <td>
+                        <input type="range" id="layer1-speed" min="1" max="10000" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer2-speed" min="1" max="10000" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer3-speed" min="1" max="10000" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer4-speed" min="1" max="10000" />
+                    </td>
+                </tr>
+                <tr data-group="offset" admin-only>
+                    <td>
+                        <input type="range" id="layer1-offset" min="0" max="100" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer2-offset" min="0" max="100" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer3-offset" min="0" max="100" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer4-offset" min="0" max="100" />
+                    </td>
+                </tr>
+                <tr data-group="repeat" admin-only>
+                    <td>
+                        <input type="range" id="layer1-repeat" min="1" max="20" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer2-repeat" min="1" max="20" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer3-repeat" min="1" max="20" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer4-repeat" min="1" max="20" />
+                    </td>
+                </tr>
+                <tr data-group="size">
+                    <td>
+                        <input type="range" id="layer1-size" min="0" max="100" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer2-size" min="0" max="100" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer3-size" min="0" max="100" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer4-size" min="0" max="100" />
+                    </td>
+                </tr>
+                <tr data-group="feather1" admin-only>
+                    <td>
+                        <input type="range" id="layer1-feather1" min="0" max="100" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer2-feather1" min="0" max="100" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer3-feather1" min="0" max="100" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer4-feather1" min="0" max="100" />
+                    </td>
+                </tr>
+                <tr data-group="feather2" admin-only>
+                    <td>
+                        <input type="range" id="layer1-feather2" min="0" max="100" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer2-feather2" min="0" max="100" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer3-feather2" min="0" max="100" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer4-feather2" min="0" max="100" />
+                    </td>
+                </tr>
+            </table>
+        </section>
+
+        <section admin-only>
+            <div>
+                Preset code: (copy/paste for presets)
+                <button id="load-from-preset">Load from textbox</button>
+                <br />
+                <textarea id="presetcode" cols="60" rows="5">{"a":3}</textarea>
+                <br />
+            </div>
+            <div>
+                <button id="send-all-props">Send all props</button>
+            </div>
+            <h3>Example presets</h3>
+            <ul class="presets">
+                <textarea cols="90" rows="20"></textarea>
+            </ul>
+        </section>
+    </body>
+</html>
