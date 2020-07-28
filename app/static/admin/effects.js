@@ -101,6 +101,27 @@ const CONTROLS = [
     },
 
     {
+        id: 'layer1-blending',
+        type: 'int',
+        prop: 'layer1/blending',
+    },
+    {
+        id: 'layer2-blending',
+        type: 'int',
+        prop: 'layer2/blending',
+    },
+    {
+        id: 'layer3-blending',
+        type: 'int',
+        prop: 'layer3/blending',
+    },
+    {
+        id: 'layer4-blending',
+        type: 'int',
+        prop: 'layer4/blending',
+    },
+
+    {
         id: 'layer1-offset',
         type: 'int',
         prop: 'layer1/offset',
