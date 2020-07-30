@@ -25,12 +25,17 @@
 
         <div id="devices-send">
             <h3>Send to Devices (select which devices will receive data)</h3>
+            <ol id="devices" class="grid"></ol>
+        </div>
+
+        <div id="presets" admin-only>
+            <h3>Save and Load presets</h3>
             <div class="grid">
-                <ol id="devices"></ol>
-                <div>
-                    <input type="checkbox" id="all-devices" />
-                    All devices
-                </div>
+                <select id="all-presets"></select>
+                <button id="save-preset">Save settings</button>
+                <button admin-only id="load-from-preset">Load from textbox</button>
+                <button id="send-all-props">Send all props</button>
+                <textarea admin-only id="presetcode" cols="60" rows="5">{"a":3}</textarea>
             </div>
         </div>
 
@@ -218,17 +223,6 @@
                     </td>
                 </tr>
             </table>
-        </div>
-
-        <div id="presets" admin-only>
-            <h3>Save and Load presets</h3>
-            <div class="grid">
-                <select id="all-presets"></select>
-                <button id="save-preset">Save settings</button>
-                <button admin-only id="load-from-preset">Load from textbox</button>
-                <button id="send-all-props">Send all props</button>
-                <textarea admin-only id="presetcode" cols="60" rows="5">{"a":3}</textarea>
-            </div>
         </div>
     </body>
 </html>
