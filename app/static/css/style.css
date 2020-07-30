@@ -1,5 +1,5 @@
 :root {
-    --input-height: calc(100 / 9 * var(--vh));
+    --input-height: calc(100 / 24 * var(--vh));
     --base: 1.25rem;
 }
 
@@ -59,12 +59,14 @@ ol {
 }
 
 #presets .grid {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }
 
-#devices-load .grid,
-#devices-send .grid {
+#devices-load .grid {
     grid-template-columns: 1fr 1fr 1fr;
+}
+#devices-send .grid {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
 }
 
 @font-face {
