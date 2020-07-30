@@ -33,51 +33,6 @@ http.listen(port, function () {
     console.log(`listening on *:${port}`)
 })
 
-// /*
-// Fixtures: Resets on reboot, not written to file
-// */
-
-// const numFixtures = 2
-// const numLayers = 4
-
-// const defaultObject = function () {
-//     return {
-//         min: 0,
-//         max: 100,
-//         val: 50,
-//         step: 10
-//         // type: 'f'
-//     }
-// }
-
-// const fixtures = {}
-
-// for (let i = 0; i < numFixtures; i++) {
-//     const fixtureObject = {
-//         length: new defaultObject(),
-//         nudge: new defaultObject()
-//     }
-
-//     for (let j = 0; j < numLayers; j++) {
-//         const layerObject = {
-//             red: new defaultObject(),
-//             green: new defaultObject(),
-//             blue: new defaultObject(),
-//             radius: new defaultObject(),
-//             feather_left: new defaultObject(),
-//             feather_right: new defaultObject(),
-//             speed: new defaultObject(),
-//             repeat: new defaultObject()
-//         }
-//         fixtureObject[`layer${j}`] = layerObject
-//     }
-//     fixtures[`fixture${i}`] = fixtureObject
-// }
-
-/*
-    Socket Logic
-*/
-
 io.on('connection', function (socket) {
     console.log('socket connected')
 
