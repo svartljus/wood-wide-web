@@ -153,7 +153,8 @@ function updateFixtureLists() {
             var lab = document.createElement('label')
             var inp = document.createElement('input')
             var sp = document.createElement('span')
-            sp.textContent = ' ' + f.id + ' (' + f.displayname + ')'
+            // sp.textContent = ' ' + f.id + ' (' + f.displayname + ')'
+            sp.textContent = ' ' + f.id
             inp.type = 'checkbox'
             inp.id = f.id
             inp.addEventListener('change', updateSelectedFixtures)
@@ -162,6 +163,10 @@ function updateFixtureLists() {
             li.appendChild(lab)
             el.appendChild(li)
         })
+        var clone = el.childNodes[0].cloneNode(true)
+        clone.querySelector('input').id = 'all-devices'
+        clone.querySelector('span').textContent = ' all'
+        el.insertBefore(clone, el.childNodes[0])
     }
 }
 
