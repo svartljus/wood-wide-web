@@ -40,5 +40,6 @@
     "layer1/feather2": 40,
     "layer2/feather2": 27,
     "layer3/feather2": 20,
-    "layer4/feather2": 50
+    "layer4/feather2": 50,
+    "name": "RGB Lines"
 }
