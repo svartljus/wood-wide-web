@@ -4,9 +4,14 @@ import socketIoModule from 'socket.io'
 import { isNullOrUndefined } from 'util'
 import httpmodule from 'http'
 import { FixtureDiscovery } from './lib/fixtureDiscovery.js'
-import { OSCSender } from './lib/oscsender.js'
+import { OSCSender } from './lib/oscsender.js'
 import { Animator } from './lib/animator.js'
 import { Animations } from './lib/animations.js'
+import path from 'path'
+import fs from 'fs'
+import junk from 'junk'
+
+const directoryPath = 'presets'
 
 const app = express()
 const http = httpmodule.createServer(app)
@@ -17,13 +22,13 @@ const animations = new Animations(oscSender)
 const fixtureDiscovery = new FixtureDiscovery()
 
 fixtureDiscovery.on('fixtures-changed', list => {
-    console.log('Fixture list changed', list);
+    console.log('Fixture list changed', list)
     io.emit('fixtures', list)
 })
 
 app.use('/', express.static('./static'))
 
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 3001
 http.listen(port, function () {
     console.log(`listening on *:${port}`)
 })
@@ -78,6 +83,29 @@ io.on('connection', function (socket) {
 
     socket.emit('fixtures', fixtureDiscovery.getList())
 
+    socket.on('load-preset', () => {
+        fs.readdir(directoryPath, function (err, files) {
+            files = files.filter(junk.not)
+            if (err) {
+                return console.log('Unable to scan directory: ' + err)
+            }
+            files.forEach(function (file) {
+                let rawdata = fs.readFileSync(path.join(directoryPath, file))
+                let preset = JSON.parse(rawdata)
+                socket.emit('preset-loaded', preset)
+            })
+        })
+    })
+
+    socket.on('save-preset', preset => {
+        let data = JSON.parse(preset)
+        var filename = data.name.replace(/[^\x00-\x7F]/g, '') + '.json'
+        fs.writeFile(path.join(directoryPath, filename), preset, err => {
+            if (err) throw err
+            console.log('Data written to file')
+        })
+    })
+
     socket.on('set-fixture-property', msg => {
         console.log('set fixture property', msg)
 
@@ -92,15 +120,16 @@ io.on('connection', function (socket) {
                     fixture[msg.nodeprop] = msg.value
                 }
             }
-        }
-        else if (msg.broadcast) {
+        } else if (msg.broadcast) {
             if (msg.prop) {
                 var message = {
                     address: '/' + msg.prop,
-                    args: [{
-                        type: 'f',
-                        value: msg.value
-                    }]
+                    args: [
+                        {
+                            type: 'f',
+                            value: msg.value
+                        }
+                    ]
                 }
 
                 fixtureDiscovery.getAllAddresses().forEach(a => {
@@ -119,12 +148,11 @@ io.on('connection', function (socket) {
             fixtureDiscovery.getAllAddresses().forEach(a => {
                 oscSender.send(message, a, 9000)
             })
-
         }
 
         if (msg.action === 'fetch-config') {
             const fix = fixtureDiscovery.getFixture(msg.fixture)
-            console.log('fetch config for device', msg, fix);
+            console.log('fetch config for device', msg, fix)
 
             if (fix) {
                 fix.fetchProps().then(() => {
@@ -144,7 +172,7 @@ io.on('connection', function (socket) {
             }
             if (msg.animation == 2) {
                 const v1 = fix.getProp('prop2', 0)
-               animations.queue(new Animator(fix.id, fix, 'prop2', v1 + 100, v1, 'sine', 3000.0))
+                animations.queue(new Animator(fix.id, fix, 'prop2', v1 + 100, v1, 'sine', 3000.0))
             }
             if (msg.animation == 3) {
                 const v2 = fix.getProp('prop3', 0)
@@ -152,7 +180,6 @@ io.on('connection', function (socket) {
             }
         }
     })
-
 })
 
 // Create some mock fixtures if you dont have any actual lights
@@ -167,14 +194,6 @@ fixtureDiscovery.addMockFixture(new Fixture('fix.16', '192.168.2.16'))
 fixtureDiscovery.addMockFixture(new Fixture('fix.17', '192.168.2.17'))
 fixtureDiscovery.addMockFixture(new Fixture('fix.18', '192.168.2.18'))
 fixtureDiscovery.addMockFixture(new Fixture('fix.19', '192.168.2.19'))
-fixtureDiscovery.addMockFixture(new Fixture('fix.20', '192.168.2.20'))
-fixtureDiscovery.addMockFixture(new Fixture('fix.21', '192.168.2.21'))
-fixtureDiscovery.addMockFixture(new Fixture('fix.22', '192.168.2.22'))
-fixtureDiscovery.addMockFixture(new Fixture('fix.23', '192.168.2.23'))
-fixtureDiscovery.addMockFixture(new Fixture('fix.24', '192.168.2.24'))
-fixtureDiscovery.addMockFixture(new Fixture('fix.25', '192.168.2.25'))
-fixtureDiscovery.addMockFixture(new Fixture('fix.26', '192.168.2.26'))
-fixtureDiscovery.addMockFixture(new Fixture('fix.27', '192.168.2.27'))
 
 oscSender.fixtureDiscovery = fixtureDiscovery
 
