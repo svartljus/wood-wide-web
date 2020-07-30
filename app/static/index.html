@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="/css/style.css" />
         <link rel="stylesheet" href="/css/presets.css" />
         <link rel="stylesheet" href="/css/layers.css" />
+        <link rel="stylesheet" href="/css/devices.css" />
         <link rel="stylesheet" href="/css/settings.css" />
         <script src="/socket.io/socket.io.js"></script>
         <script src="/js/controls.js"></script>
@@ -14,51 +15,39 @@
         <script src="/js/prefixfree.min.js"></script>
     </head>
     <body active-layer="layer1">
-        <div id="devices-load" admin-only>
-            <h3>Load from Devices (load device data)</h3>
-            <div class="grid">
-                <select id="load-from-device"></select>
-                <button id="load-from-selected-device">Load from cache</button>
-                <button id="load-from-selected-device2">Load from device</button>
-            </div>
+        <div id="devices-load" class="grid" admin-only>
+            <select id="load-from-device"></select>
+            <button id="load-from-selected-device">Load from cache</button>
+            <button id="load-from-selected-device2">Load from device</button>
         </div>
 
-        <div id="devices-send">
-            <h3>Send to Devices (select which devices will receive data)</h3>
-            <ol id="devices" class="grid"></ol>
+        <div id="devices" class="grid"></div>
+
+        <div id="presets" class="grid" admin-only>
+            <select id="all-presets"></select>
+            <button id="save-preset">Save settings</button>
+            <button admin-only id="load-from-preset">Load from textbox</button>
+            <button id="send-all-props">Send all props</button>
+            <textarea admin-only id="presetcode" cols="60" rows="5">{"a":3}</textarea>
         </div>
 
-        <div id="presets" admin-only>
-            <h3>Save and Load presets</h3>
-            <div class="grid">
-                <select id="all-presets"></select>
-                <button id="save-preset">Save settings</button>
-                <button admin-only id="load-from-preset">Load from textbox</button>
-                <button id="send-all-props">Send all props</button>
-                <textarea admin-only id="presetcode" cols="60" rows="5">{"a":3}</textarea>
-            </div>
-        </div>
-
-        <div id="layers">
-            <h3>Layers (select which layer to edit)</h3>
-            <div class="grid">
-                <button id="layer1" onclick="document.body.setAttribute('active-layer',this.id)">
-                    <span>1</span>
-                </button>
-                <button id="layer2" onclick="document.body.setAttribute('active-layer',this.id)">
-                    <span>2</span>
-                </button>
-                <button id="layer3" onclick="document.body.setAttribute('active-layer',this.id)">
-                    <span>3</span>
-                </button>
-                <button id="layer4" onclick="document.body.setAttribute('active-layer',this.id)">
-                    <span>4</span>
-                </button>
-            </div>
+        <div id="layers" class="grid">
+            <button id="layer1" onclick="document.body.setAttribute('active-layer',this.id)">
+                <span>1</span>
+            </button>
+            <button id="layer2" onclick="document.body.setAttribute('active-layer',this.id)">
+                <span>2</span>
+            </button>
+            <button id="layer3" onclick="document.body.setAttribute('active-layer',this.id)">
+                <span>3</span>
+            </button>
+            <button id="layer4" onclick="document.body.setAttribute('active-layer',this.id)">
+                <span>4</span>
+            </button>
         </div>
 
         <div id="settings">
-            <h3>Settings (click and drag to change the values)</h3>
+            <!-- <h3>Settings (click and drag to change the values)</h3> -->
             <table>
                 <tr admin-only>
                     <td>

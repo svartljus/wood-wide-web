@@ -32,13 +32,13 @@ function updateLabel(id) {
 }
 
 function updateColor(id) {
-    let value = document.getElementById(id).value
+    let val = document.getElementById(id).value
     let layerId = id.substring(0, id.indexOf('-'))
     let layerBtn = document.getElementById(layerId)
-    if (id.includes('red')) layerBtn.setAttribute('data-red', value)
-    if (id.includes('green')) layerBtn.setAttribute('data-green', value)
-    if (id.includes('blue')) layerBtn.setAttribute('data-blue', value)
-    if (id.includes('opacity')) layerBtn.setAttribute('data-alpha', value)
+    if (id.includes('red')) layerBtn.setAttribute('data-red', val)
+    if (id.includes('green')) layerBtn.setAttribute('data-green', val)
+    if (id.includes('blue')) layerBtn.setAttribute('data-blue', val)
+    if (id.includes('opacity')) layerBtn.setAttribute('data-alpha', val)
     let c = {
         r: Math.ceil(layerBtn.getAttribute('data-red') * 2) || 0,
         g: Math.ceil(layerBtn.getAttribute('data-green') * 2) || 0,
@@ -46,12 +46,7 @@ function updateColor(id) {
         a: layerBtn.getAttribute('data-alpha') / 100 || 0
     }
     c.a = 1
-
     document.querySelector(':root').style.setProperty(`--${layerId}-color`, `rgba(${c.r},${c.g},${c.b},${c.a})`)
-    // layerBtn.style.boxShadow = `inset 0 0 0 1000px rgba(${c.r},${c.g},${c.b},${c.a})`
-    // layerBtn.style.borderColor = `rgba(${c.r},${c.g},${c.b},${c.a})`
-    // document.getElementById('params').style.backgroundColor = `rgba(${c.r},${c.g},${c.b},${c.a}`
-    // layerBtn.style.backgroundColor = `rgba(${c.r},${c.g},${c.b},${c.a})`
 }
 
 function updateLabels() {
@@ -149,24 +144,23 @@ function updateFixtureLists() {
         el.innerHTML = ''
         all_fixtures.forEach(f => {
             // console.log('f', f)
-            var li = document.createElement('li')
+            var div = document.createElement('div')
             var lab = document.createElement('label')
             var inp = document.createElement('input')
-            var sp = document.createElement('span')
-            // sp.textContent = ' ' + f.id + ' (' + f.displayname + ')'
-            sp.textContent = ' ' + f.id
+            lab.textContent = f.id
+            lab.setAttribute('for', f.id)
             inp.type = 'checkbox'
             inp.id = f.id
             inp.addEventListener('change', updateSelectedFixtures)
-            lab.appendChild(inp)
-            lab.appendChild(sp)
-            li.appendChild(lab)
-            el.appendChild(li)
+            div.appendChild(inp)
+            div.appendChild(lab)
+            el.appendChild(div)
         })
-        var clone = el.childNodes[0].cloneNode(true)
-        clone.querySelector('input').id = 'all-devices'
-        clone.querySelector('span').textContent = ' all'
-        el.insertBefore(clone, el.childNodes[0])
+        // var clone = el.childNodes[0].cloneNode(true)
+        // clone.querySelector('input').id = 'all-devices'
+        // clone.querySelector('label').textContent = ' all'
+        // clone.querySelector('label').setAttribute('for', 'all-devices')
+        // el.insertBefore(clone, el.childNodes[0])
     }
 }
 

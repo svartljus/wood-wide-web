@@ -1,0 +1,16 @@
+#devices input {
+    display: none;
+}
+
+#devices label {
+    display: block;
+    height: var(--input-height);
+    text-align: center;
+    line-height: var(--input-height);
+    background-color: lightgray;
+    text-transform: capitalize;
+}
+
+#devices input:checked ~ label {
+    background-color: darkgray;
+}

@@ -36,7 +36,7 @@ td,
 td div {
     position: absolute;
     width: 100%;
-    text-align: center;
+    /* text-align: center; */
     pointer-events: none;
     /* mix-blend-mode: soft-light; */
     text-transform: uppercase;
@@ -50,6 +50,16 @@ td div * {
     filter: contrast(0);
 }
 
+td div *:first-child {
+    text-align: left;
+    padding-left: var(--base);
+}
+
+td div *:last-child {
+    text-align: right;
+    padding-right: var(--base);
+}
+
 .range-slider {
     appearance: none;
     outline: none;
@@ -57,13 +67,23 @@ td div * {
     background-color: #ccc;
 }
 
-.range-slide::-webkit-slider-runnable-track {
-    background-color: white;
-}
 .range-slider::-webkit-slider-thumb {
-    background: #fafafa;
     appearance: none;
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
+}
+input[type='range']::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    /* background: #ccc; */
+}
+
+input[type='range']:focus {
+    /* filter: invert(1); */
+}
+
+input[type='range']::-webkit-slider-thumb {
+    height: 100%;
+    width: 20%;
+    /* background: #ffffff; */
+    /* opacity: 0.5; */
 }
