@@ -2,26 +2,233 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta content="minimum-scale=1.0, width=device-width, maximum-scale=1, user-scalable=no" name="viewport" />
+        <link rel="stylesheet" href="/css/reset.css" />
+        <link rel="stylesheet" href="/css/style.css" />
+        <link rel="stylesheet" href="/css/presets.css" />
+        <link rel="stylesheet" href="/css/layers.css" />
+        <link rel="stylesheet" href="/css/settings.css" />
         <script src="/socket.io/socket.io.js"></script>
-        <script src="app.js"></script>
-        <link rel="stylesheet" href="style.css" />
+        <script src="/js/controls.js"></script>
+        <script src="/js/app.js"></script>
+        <script src="/js/prefixfree.min.js"></script>
     </head>
-    <body>
-        <ul id="animatortest">
-        </ul>
-        <datalist id="tickmarks">
-            <option value="0" label="0%"></option>
-            <option value="10"></option>
-            <option value="20"></option>
-            <option value="30"></option>
-            <option value="40"></option>
-            <option value="50" label="50%"></option>
-            <option value="60"></option>
-            <option value="70"></option>
-            <option value="80"></option>
-            <option value="90"></option>
-            <option value="100" label="100%"></option>
-        </datalist>
+    <body active-layer="layer1">
+        <div id="devices-load" admin-only>
+            <h3>Load from Devices (load device data)</h3>
+            <div class="grid">
+                <select id="load-from-device"></select>
+                <button id="load-from-selected-device">Load from cache</button>
+                <button id="load-from-selected-device2">Load from device</button>
+            </div>
+        </div>
+
+        <div id="devices-send">
+            <h3>Send to Devices (select which devices will receive data)</h3>
+            <div class="grid">
+                <ol id="devices"></ol>
+                <div>
+                    <input type="checkbox" id="all-devices" />
+                    All devices
+                </div>
+            </div>
+        </div>
+
+        <div id="layers">
+            <h3>Layers (select which layer to edit)</h3>
+            <div class="grid">
+                <button id="layer1" onclick="document.body.setAttribute('active-layer',this.id)">
+                    <span>1</span>
+                </button>
+                <button id="layer2" onclick="document.body.setAttribute('active-layer',this.id)">
+                    <span>2</span>
+                </button>
+                <button id="layer3" onclick="document.body.setAttribute('active-layer',this.id)">
+                    <span>3</span>
+                </button>
+                <button id="layer4" onclick="document.body.setAttribute('active-layer',this.id)">
+                    <span>4</span>
+                </button>
+            </div>
+        </div>
+
+        <div id="settings">
+            <h3>Settings (click and drag to change the values)</h3>
+            <table>
+                <tr admin-only>
+                    <td>
+                        <input type="range" min="0" max="100000" id="base-speed" />
+                    </td>
+                    <td>
+                        <input type="range" id="opacity" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="range" id="layer1-red" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer2-red" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer3-red" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer4-red" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="range" id="layer1-green" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer2-green" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer3-green" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer4-green" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="range" id="layer1-blue" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer2-blue" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer3-blue" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer4-blue" />
+                    </td>
+                </tr>
+                <tr admin-only>
+                    <td>
+                        <input type="range" id="layer1-blending" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer2-blending" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer3-blending" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer4-blending" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="range" id="layer1-opacity" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer2-opacity" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer3-opacity" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer4-opacity" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="range" id="layer1-speed" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer2-speed" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer3-speed" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer4-speed" />
+                    </td>
+                </tr>
+                <tr admin-only>
+                    <td>
+                        <input type="range" id="layer1-offset" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer2-offset" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer3-offset" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer4-offset" />
+                    </td>
+                </tr>
+                <tr admin-only>
+                    <td>
+                        <input type="range" id="layer1-repeat" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer2-repeat" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer3-repeat" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer4-repeat" />
+                    </td>
+                </tr>
+                <tr admin-only>
+                    <td>
+                        <input type="range" id="layer1-size" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer2-size" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer3-size" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer4-size" />
+                    </td>
+                </tr>
+                <tr admin-only>
+                    <td>
+                        <input type="range" id="layer1-feather1" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer2-feather1" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer3-feather1" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer4-feather1" />
+                    </td>
+                </tr>
+                <tr admin-only>
+                    <td>
+                        <input type="range" id="layer1-feather2" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer2-feather2" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer3-feather2" />
+                    </td>
+                    <td>
+                        <input type="range" id="layer4-feather2" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div id="presets" admin-only>
+            <h3>Save and Load presets</h3>
+            <div class="grid">
+                <select id="all-presets"></select>
+                <button id="save-preset">Save settings</button>
+                <button admin-only id="load-from-preset">Load from textbox</button>
+                <button id="send-all-props">Send all props</button>
+                <textarea admin-only id="presetcode" cols="60" rows="5">{"a":3}</textarea>
+            </div>
+        </div>
     </body>
 </html>

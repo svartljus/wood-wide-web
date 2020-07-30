@@ -1,0 +1,69 @@
+table {
+    width: 100%;
+    position: relative;
+    /* background-color: lightgray; */
+}
+
+table,
+table * {
+    width: 100%;
+}
+
+tr {
+    display: flex;
+    padding: 0.25rem 0;
+    box-sizing: border-box;
+}
+
+tr:nth-child(n + 2) td {
+    display: none;
+}
+
+td {
+    position: relative;
+    align-items: center;
+    color: white;
+}
+
+td,
+[active-layer='layer1'] tr:nth-child(n + 2) td:nth-child(1),
+[active-layer='layer2'] tr:nth-child(n + 2) td:nth-child(2),
+[active-layer='layer3'] tr:nth-child(n + 2) td:nth-child(3),
+[active-layer='layer4'] tr:nth-child(n + 2) td:nth-child(4) {
+    display: flex;
+}
+
+td div {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    pointer-events: none;
+    /* mix-blend-mode: soft-light; */
+    text-transform: uppercase;
+    display: flex;
+}
+
+td div * {
+    /* display: block; */
+    color: inherit;
+    mix-blend-mode: difference;
+    filter: contrast(0);
+}
+
+.range-slider {
+    appearance: none;
+    outline: none;
+    height: var(--input-height);
+    background-color: #ccc;
+}
+
+.range-slide::-webkit-slider-runnable-track {
+    background-color: white;
+}
+.range-slider::-webkit-slider-thumb {
+    background: #fafafa;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+}

@@ -1,9 +1,10 @@
 :root {
     --input-height: calc(100 / 9 * var(--vh));
+    --base: 1.25rem;
 }
 
 html {
-    font: 18px / 1.25 -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+    font: 16px / 1.25 -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
     /* overflow: hidden; */
 }
 
@@ -30,6 +31,18 @@ button {
     cursor: pointer;
     padding: 0;
 }
+button {
+    height: var(--input-height);
+    font-size: inherit;
+    color: white;
+    /* mix-blend-mode: difference; */
+    background-color: lightgray;
+    position: relative;
+}
+
+p {
+    margin-bottom: var(--base);
+}
 
 ul,
 ol {
@@ -38,17 +51,20 @@ ol {
     padding: 0;
 }
 
-#devices,
-#layers {
+.grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-column-gap: 0.5rem;
-    padding: 0.25rem 0;
     box-sizing: border-box;
 }
 
-#devices {
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+#presets .grid {
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+#devices-load .grid,
+#devices-send .grid {
+    grid-template-columns: 1fr 1fr 1fr;
 }
 
 @font-face {
