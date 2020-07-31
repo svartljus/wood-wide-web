@@ -1,5 +1,6 @@
 :root {
-    --input-height: calc(100 / 10 * var(--vh));
+    /* --input-height: calc(100 / 10 * var(--vh)); */
+    --input-height: calc(10vh - 0.55rem - (var(--vh) / 10));
     --base: 1.25rem;
 }
 
@@ -63,15 +64,16 @@ ol {
     box-sizing: border-box;
 }
 
-#presets .grid {
+#presets.grid {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }
 
-#devices-load .grid {
+#devices-load.grid {
     grid-template-columns: 1fr 1fr 1fr;
 }
-#devices-send .grid {
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+
+#devices.grid {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }
 
 @font-face {

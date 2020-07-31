@@ -11,8 +11,12 @@ table * {
 
 tr {
     display: flex;
-    padding: 0.25rem 0;
+    /* padding: 0.25rem 0; */
     box-sizing: border-box;
+}
+
+tr:not(:last-child) {
+    margin-bottom: 0.5rem;
 }
 
 tr:nth-child(n + 2) td {

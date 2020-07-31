@@ -156,11 +156,12 @@ function updateFixtureLists() {
             div.appendChild(lab)
             el.appendChild(div)
         })
-        // var clone = el.childNodes[0].cloneNode(true)
-        // clone.querySelector('input').id = 'all-devices'
-        // clone.querySelector('label').textContent = ' all'
-        // clone.querySelector('label').setAttribute('for', 'all-devices')
-        // el.insertBefore(clone, el.childNodes[0])
+        var clone = el.childNodes[0].cloneNode(true)
+        clone.querySelector('input').id = 'all-devices'
+        clone.querySelector('label').textContent = ' all'
+        clone.querySelector('label').setAttribute('for', 'all-devices')
+        el.insertBefore(clone, el.childNodes[0])
+        clone.style.display = 'none'
     }
 }
 
