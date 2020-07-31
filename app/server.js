@@ -28,7 +28,7 @@ fixtureDiscovery.on('fixtures-changed', list => {
 
 app.use('/', express.static('./static'))
 
-const port = process.env.PORT || 3001
+const port = process.env.PORT || 3000
 http.listen(port, function () {
     console.log(`listening on *:${port}`)
 })
