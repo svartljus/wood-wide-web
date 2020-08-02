@@ -9,6 +9,7 @@
     line-height: var(--input-height);
     background-color: lightgray;
     text-transform: capitalize;
+    overflow: hidden;
 }
 
 #devices input:checked ~ label {

@@ -19,7 +19,7 @@ tr:not(:last-child) {
     margin-bottom: 0.5rem;
 }
 
-tr:nth-child(n + 2) td {
+tr:nth-child(n + 3) td {
     display: none;
 }
 
@@ -30,10 +30,10 @@ td {
 }
 
 td,
-[active-layer='layer1'] tr:nth-child(n + 2) td:nth-child(1),
-[active-layer='layer2'] tr:nth-child(n + 2) td:nth-child(2),
-[active-layer='layer3'] tr:nth-child(n + 2) td:nth-child(3),
-[active-layer='layer4'] tr:nth-child(n + 2) td:nth-child(4) {
+[active-layer='layer1'] tr:nth-child(n + 3) td:nth-child(1),
+[active-layer='layer2'] tr:nth-child(n + 3) td:nth-child(2),
+[active-layer='layer3'] tr:nth-child(n + 3) td:nth-child(3),
+[active-layer='layer4'] tr:nth-child(n + 3) td:nth-child(4) {
     display: flex;
 }
 

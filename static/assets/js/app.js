@@ -289,7 +289,7 @@ function loadPresets() {
     })
 
     var o = new Option()
-    o.text = '-'
+    o.text = 'select preset'
     el.appendChild(o)
     socket.emit('load-preset')
     socket.on('preset-loaded', preset => {
@@ -326,7 +326,11 @@ window.addEventListener('load', () => {
 
         inp.oninput()
         lab.setAttribute('for', c.id)
-        lab.textContent = c.id.substr(c.id.lastIndexOf('-') + 1)
+        if (inp.hasAttribute('data-title')) {
+            lab.textContent = inp.getAttribute('data-title')
+        } else {
+            lab.textContent = c.id.substr(c.id.lastIndexOf('-') + 1)
+        }
         span.setAttribute('data-label-for', c.id)
         span.textContent = 0
         div.appendChild(lab)

@@ -3,16 +3,16 @@
     <head>
         <meta charset="utf-8" />
         <meta content="minimum-scale=1.0, width=device-width, maximum-scale=1, user-scalable=no" name="viewport" />
-        <link rel="stylesheet" href="/css/reset.css" />
-        <link rel="stylesheet" href="/css/style.css" />
-        <link rel="stylesheet" href="/css/presets.css" />
-        <link rel="stylesheet" href="/css/layers.css" />
-        <link rel="stylesheet" href="/css/devices.css" />
-        <link rel="stylesheet" href="/css/sliders.css" />
+        <link rel="stylesheet" href="./assets/css/reset.css" />
+        <link rel="stylesheet" href="./assets/css/style.css" />
+        <link rel="stylesheet" href="./assets/css/presets.css" />
+        <link rel="stylesheet" href="./assets/css/layers.css" />
+        <link rel="stylesheet" href="./assets/css/devices.css" />
+        <link rel="stylesheet" href="./assets/css/sliders.css" />
         <script src="/socket.io/socket.io.js"></script>
-        <script src="/js/controls.js"></script>
-        <script src="/js/app.js"></script>
-        <script src="/js/prefixfree.min.js"></script>
+        <script src="./assets/js/controls.js"></script>
+        <script src="./assets/js/app.js"></script>
+        <script src="./assets/js/prefixfree.min.js"></script>
     </head>
     <body active-layer="layer1">
         <div id="devices-load" class="grid" admin-only>
@@ -47,14 +47,15 @@
         </div>
 
         <div id="settings">
-            <!-- <h3>Settings (click and drag to change the values)</h3> -->
             <table>
                 <tr admin-only>
                     <td>
-                        <input type="range" min="0" max="100000" id="base-speed" />
+                        <input type="range" min="0" max="100000" id="base-speed" data-title="global speed" />
                     </td>
+                </tr>
+                <tr admin-only>
                     <td>
-                        <input type="range" id="opacity" />
+                        <input type="range" id="opacity" data-title="global opacity" />
                     </td>
                 </tr>
                 <tr>
