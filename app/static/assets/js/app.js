@@ -192,6 +192,7 @@ function sendOSCUpdate(ctrl, fixture, broadcast, obj) {
 
 function sendOSCUpdates(ctrl, obj) {
     var broadcast = document.getElementById('all-devices').checked
+    broadcast = true
     if (broadcast) {
         sendOSCUpdate(ctrl, undefined, true, obj)
     } else {
