@@ -150,7 +150,7 @@ function updateFixtureLists() {
             lab.textContent = f.id
             lab.setAttribute('for', f.id)
             inp.type = 'checkbox'
-            inp.setAttribute('checked', true)
+            inp.checked = true
             inp.id = f.id
             inp.addEventListener('change', updateSelectedFixtures)
             div.appendChild(inp)
