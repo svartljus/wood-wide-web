@@ -58,7 +58,7 @@ function updateLabels() {
 function updateColors() {
     CONTROLS.forEach(c => {
         if (c.id.match(/-red|-green|-blue|-opacity/)) {
-            console.log(c)
+            // console.log(c)
             updateColor(c.id)
         }
     })
@@ -314,13 +314,14 @@ window.addEventListener('load', () => {
         const lab = document.createElement('label')
         const span = document.createElement('span')
         const range = c.range || [0, 100]
+        const value = c.default !== undefined ? c.default : 0.5
         inp.min = range[0]
         inp.max = range[1]
-        inp.value = 0.5 * (range[0] + range[1])
+        inp.value = value * (range[0] + range[1])
         inp.classList.add('range-slider')
         inp.oninput = () => {
             // let a = inp.value
-            let a = (inp.value / inp.max) * 100
+            let a = Math.round((inp.value / inp.max) * 100)
             inp.style.background = `linear-gradient(to right,var(--slider-color),var(--slider-color) ${a}%,#eee ${a}%)`
         }
 
@@ -361,10 +362,10 @@ window.addEventListener('load', () => {
     document.getElementById('load-from-selected-device').addEventListener('click', loadFromSelectedDevice)
     document.getElementById('load-from-selected-device2').addEventListener('click', loadFromSelectedDevice2)
 
-    loadFromPreset('{}', false)
+    // loadFromPreset('{}', false)
     updateLabels()
     updateColors()
-    updatePresetCode()
+    // updatePresetCode()
 
     window.onresize = function () {
         document.querySelector(':root').style.setProperty('--vh', window.innerHeight / 100 + 'px')

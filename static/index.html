@@ -21,7 +21,7 @@
             <button id="load-from-selected-device2">Load from device</button>
         </div>
 
-        <div id="devices" class="grid"></div>
+        <div id="devices" class="grid" admin-only></div>
 
         <div id="presets" class="grid" admin-only>
             <select id="all-presets"></select>
@@ -50,166 +50,166 @@
             <table>
                 <tr admin-only>
                     <td>
-                        <input type="range" min="0" max="100000" id="base-speed" data-title="global speed" />
+                        <input type="range" value="0" min="0" max="100000" id="base-speed" data-title="global speed" />
                     </td>
                 </tr>
                 <tr admin-only>
                     <td>
-                        <input type="range" id="opacity" data-title="global opacity" />
+                        <input type="range" value="0" id="opacity" data-title="global opacity" />
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <input type="range" id="layer1-red" />
+                        <input type="range" value="0" id="layer1-red" />
                     </td>
                     <td>
-                        <input type="range" id="layer2-red" />
+                        <input type="range" value="0" id="layer2-red" />
                     </td>
                     <td>
-                        <input type="range" id="layer3-red" />
+                        <input type="range" value="0" id="layer3-red" />
                     </td>
                     <td>
-                        <input type="range" id="layer4-red" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="range" id="layer1-green" />
-                    </td>
-                    <td>
-                        <input type="range" id="layer2-green" />
-                    </td>
-                    <td>
-                        <input type="range" id="layer3-green" />
-                    </td>
-                    <td>
-                        <input type="range" id="layer4-green" />
+                        <input type="range" value="0" id="layer4-red" />
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <input type="range" id="layer1-blue" />
+                        <input type="range" value="0" id="layer1-green" />
                     </td>
                     <td>
-                        <input type="range" id="layer2-blue" />
+                        <input type="range" value="0" id="layer2-green" />
                     </td>
                     <td>
-                        <input type="range" id="layer3-blue" />
+                        <input type="range" value="0" id="layer3-green" />
                     </td>
                     <td>
-                        <input type="range" id="layer4-blue" />
+                        <input type="range" value="0" id="layer4-green" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="range" value="0" id="layer1-blue" />
+                    </td>
+                    <td>
+                        <input type="range" value="0" id="layer2-blue" />
+                    </td>
+                    <td>
+                        <input type="range" value="0" id="layer3-blue" />
+                    </td>
+                    <td>
+                        <input type="range" value="0" id="layer4-blue" />
                     </td>
                 </tr>
                 <tr admin-only>
                     <td>
-                        <input type="range" id="layer1-blending" />
+                        <input type="range" value="0" id="layer1-blending" />
                     </td>
                     <td>
-                        <input type="range" id="layer2-blending" />
+                        <input type="range" value="0" id="layer2-blending" />
                     </td>
                     <td>
-                        <input type="range" id="layer3-blending" />
+                        <input type="range" value="0" id="layer3-blending" />
                     </td>
                     <td>
-                        <input type="range" id="layer4-blending" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="range" id="layer1-opacity" />
-                    </td>
-                    <td>
-                        <input type="range" id="layer2-opacity" />
-                    </td>
-                    <td>
-                        <input type="range" id="layer3-opacity" />
-                    </td>
-                    <td>
-                        <input type="range" id="layer4-opacity" />
+                        <input type="range" value="0" id="layer4-blending" />
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <input type="range" id="layer1-speed" />
+                        <input type="range" value="0" id="layer1-opacity" />
                     </td>
                     <td>
-                        <input type="range" id="layer2-speed" />
+                        <input type="range" value="0" id="layer2-opacity" />
                     </td>
                     <td>
-                        <input type="range" id="layer3-speed" />
+                        <input type="range" value="0" id="layer3-opacity" />
                     </td>
                     <td>
-                        <input type="range" id="layer4-speed" />
+                        <input type="range" value="0" id="layer4-opacity" />
                     </td>
                 </tr>
                 <tr admin-only>
                     <td>
-                        <input type="range" id="layer1-offset" />
+                        <input type="range" value="0" id="layer1-speed" />
                     </td>
                     <td>
-                        <input type="range" id="layer2-offset" />
+                        <input type="range" value="0" id="layer2-speed" />
                     </td>
                     <td>
-                        <input type="range" id="layer3-offset" />
+                        <input type="range" value="0" id="layer3-speed" />
                     </td>
                     <td>
-                        <input type="range" id="layer4-offset" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="range" id="layer1-repeat" />
-                    </td>
-                    <td>
-                        <input type="range" id="layer2-repeat" />
-                    </td>
-                    <td>
-                        <input type="range" id="layer3-repeat" />
-                    </td>
-                    <td>
-                        <input type="range" id="layer4-repeat" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="range" id="layer1-size" />
-                    </td>
-                    <td>
-                        <input type="range" id="layer2-size" />
-                    </td>
-                    <td>
-                        <input type="range" id="layer3-size" />
-                    </td>
-                    <td>
-                        <input type="range" id="layer4-size" />
+                        <input type="range" value="0" id="layer4-speed" />
                     </td>
                 </tr>
                 <tr admin-only>
                     <td>
-                        <input type="range" id="layer1-feather1" />
+                        <input type="range" value="0" id="layer1-offset" />
                     </td>
                     <td>
-                        <input type="range" id="layer2-feather1" />
+                        <input type="range" value="0" id="layer2-offset" />
                     </td>
                     <td>
-                        <input type="range" id="layer3-feather1" />
+                        <input type="range" value="0" id="layer3-offset" />
                     </td>
                     <td>
-                        <input type="range" id="layer4-feather1" />
+                        <input type="range" value="0" id="layer4-offset" />
                     </td>
                 </tr>
                 <tr admin-only>
                     <td>
-                        <input type="range" id="layer1-feather2" />
+                        <input type="range" value="0" id="layer1-repeat" />
                     </td>
                     <td>
-                        <input type="range" id="layer2-feather2" />
+                        <input type="range" value="0" id="layer2-repeat" />
                     </td>
                     <td>
-                        <input type="range" id="layer3-feather2" />
+                        <input type="range" value="0" id="layer3-repeat" />
                     </td>
                     <td>
-                        <input type="range" id="layer4-feather2" />
+                        <input type="range" value="0" id="layer4-repeat" />
+                    </td>
+                </tr>
+                <tr admin-only>
+                    <td>
+                        <input type="range" value="0" id="layer1-size" />
+                    </td>
+                    <td>
+                        <input type="range" value="0" id="layer2-size" />
+                    </td>
+                    <td>
+                        <input type="range" value="0" id="layer3-size" />
+                    </td>
+                    <td>
+                        <input type="range" value="0" id="layer4-size" />
+                    </td>
+                </tr>
+                <tr admin-only>
+                    <td>
+                        <input type="range" value="0" id="layer1-feather1" />
+                    </td>
+                    <td>
+                        <input type="range" value="0" id="layer2-feather1" />
+                    </td>
+                    <td>
+                        <input type="range" value="0" id="layer3-feather1" />
+                    </td>
+                    <td>
+                        <input type="range" value="0" id="layer4-feather1" />
+                    </td>
+                </tr>
+                <tr admin-only>
+                    <td>
+                        <input type="range" value="0" id="layer1-feather2" />
+                    </td>
+                    <td>
+                        <input type="range" value="0" id="layer2-feather2" />
+                    </td>
+                    <td>
+                        <input type="range" value="0" id="layer3-feather2" />
+                    </td>
+                    <td>
+                        <input type="range" value="0" id="layer4-feather2" />
                     </td>
                 </tr>
             </table>

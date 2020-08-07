@@ -12,6 +12,7 @@ const CONTROLS = [
     {
         id: 'base-speed',
         prop: 'basespeed',
+        range: [1, 10000],
         formatter: rpmFormatter
     },
 
@@ -23,22 +24,26 @@ const CONTROLS = [
 
     {
         id: 'layer1-red',
-        prop: 'layer1/red'
+        prop: 'layer1/red',
+        default: 1
     },
 
     {
         id: 'layer2-red',
-        prop: 'layer2/red'
+        prop: 'layer2/red',
+        default: 1
     },
 
     {
         id: 'layer3-red',
-        prop: 'layer3/red'
+        prop: 'layer3/red',
+        default: 1
     },
 
     {
         id: 'layer4-red',
-        prop: 'layer4/red'
+        prop: 'layer4/red',
+        default: 1
     },
 
     {
@@ -108,43 +113,51 @@ const CONTROLS = [
     {
         id: 'layer1-opacity',
         prop: 'layer1/opacity',
+        value: 1,
         formatter: percentFormatter
     },
     {
         id: 'layer2-opacity',
         prop: 'layer2/opacity',
+        default: 1,
         formatter: percentFormatter
     },
     {
         id: 'layer3-opacity',
         prop: 'layer3/opacity',
+        default: 1,
         formatter: percentFormatter
     },
     {
         id: 'layer4-opacity',
         prop: 'layer4/opacity',
+        default: 1,
         formatter: percentFormatter
     },
 
     {
         id: 'layer1-blending',
         prop: 'layer1/blending',
-        range: [0, 5]
+        default: 0,
+        range: [0, 2]
     },
     {
         id: 'layer2-blending',
         prop: 'layer2/blending',
-        range: [0, 5]
+        default: 0,
+        range: [0, 2]
     },
     {
         id: 'layer3-blending',
         prop: 'layer3/blending',
-        range: [0, 5]
+        default: 0,
+        range: [0, 2]
     },
     {
         id: 'layer4-blending',
         prop: 'layer4/blending',
-        range: [0, 5]
+        default: 0,
+        range: [0, 2]
     },
 
     {
