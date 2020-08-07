@@ -158,6 +158,7 @@ function updateFixtureLists() {
         })
         var clone = el.childNodes[0].cloneNode(true)
         clone.querySelector('input').id = 'all-devices'
+        clone.querySelector('input').checked = true
         clone.querySelector('label').textContent = ' all'
         clone.querySelector('label').setAttribute('for', 'all-devices')
         el.insertBefore(clone, el.childNodes[0])
