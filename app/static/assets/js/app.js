@@ -133,6 +133,7 @@ function updateFixtureLists() {
             // console.log('f', f)
             var o = new Option()
             o.value = f.id
+            // o.setAttribute('selected', 'selected')
             o.text = f.id + ' (' + f.displayname + ')'
             el.options[i] = o
         })
@@ -149,10 +150,12 @@ function updateFixtureLists() {
             var inp = document.createElement('input')
             lab.textContent = f.id
             lab.setAttribute('for', f.id)
-            inp.type = 'checkbox'
-            inp.checked = true
+            inp.type = 'radio'
             inp.id = f.id
+            inp.name = 'devices'
+            inp.checked = true
             inp.addEventListener('change', updateSelectedFixtures)
+            inp.addEventListener('change', loadFromSelectedDevice)
             div.appendChild(inp)
             div.appendChild(lab)
             el.appendChild(div)
@@ -160,10 +163,11 @@ function updateFixtureLists() {
         var clone = el.childNodes[0].cloneNode(true)
         clone.querySelector('input').id = 'all-devices'
         clone.querySelector('input').checked = true
-        clone.querySelector('label').textContent = ' all'
+        clone.querySelector('label').textContent = 'alla'
         clone.querySelector('label').setAttribute('for', 'all-devices')
-        el.insertBefore(clone, el.childNodes[0])
-        clone.style.display = 'none'
+        // el.insertBefore(clone, el.childNodes[0])
+        el.appendChild(clone)
+        // clone.style.display = 'none'
     }
 }
 

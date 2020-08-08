@@ -11,8 +11,11 @@ table * {
 
 tr {
     display: flex;
+    display: grid;
     /* padding: 0.25rem 0; */
     box-sizing: border-box;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-column-gap: 0.5rem;
 }
 
 tr:not(:last-child) {
@@ -20,7 +23,7 @@ tr:not(:last-child) {
 }
 
 tr:nth-child(n + 3) td {
-    display: none;
+    /* display: none; */
 }
 
 td {
@@ -37,6 +40,11 @@ td,
     display: flex;
 }
 
+#layer4,
+tr:nth-child(n + 3) td:nth-child(4) {
+    display: none !important;
+}
+
 td div {
     position: absolute;
     width: 100%;
@@ -45,13 +53,14 @@ td div {
     /* mix-blend-mode: soft-light; */
     text-transform: uppercase;
     display: flex;
+    /* filter: invert(1); */
 }
 
 td div * {
     /* display: block; */
     color: inherit;
     mix-blend-mode: difference;
-    filter: contrast(0);
+    filter: contrast(1);
 }
 
 td div *:first-child {

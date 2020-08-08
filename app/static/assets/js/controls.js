@@ -139,25 +139,25 @@ const CONTROLS = [
         id: 'layer1-blending',
         prop: 'layer1/blending',
         default: 0,
-        range: [0, 2]
+        range: [0, 1]
     },
     {
         id: 'layer2-blending',
         prop: 'layer2/blending',
         default: 0,
-        range: [0, 2]
+        range: [0, 1]
     },
     {
         id: 'layer3-blending',
         prop: 'layer3/blending',
         default: 0,
-        range: [0, 2]
+        range: [0, 1]
     },
     {
         id: 'layer4-blending',
         prop: 'layer4/blending',
         default: 0,
-        range: [0, 2]
+        range: [0, 1]
     },
 
     {

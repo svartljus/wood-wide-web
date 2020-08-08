@@ -5,7 +5,7 @@
 }
 
 html {
-    font: 16px / 1.25 -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+    font: 26px / 1.25 -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
     /* overflow: hidden; */
     /* background-color: #111; */
 }
@@ -64,7 +64,8 @@ ol {
 
 .grid {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    /* grid-template-columns: 1fr 1fr 1fr 1fr; */
+    grid-template-columns: 1fr 1fr 1fr;
     grid-column-gap: 0.5rem;
     grid-row-gap: 0.5rem;
     box-sizing: border-box;
@@ -79,7 +80,7 @@ ol {
 }
 
 #devices.grid {
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
 }
 
 @font-face {

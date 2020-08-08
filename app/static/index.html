@@ -15,7 +15,7 @@
         <script src="./assets/js/prefixfree.min.js"></script>
     </head>
     <body active-layer="layer1">
-        <div id="devices-load" class="grid">
+        <div id="devices-load" class="grid" admin-only>
             <select id="load-from-device"></select>
             <button id="load-from-selected-device">Load from cache</button>
             <button id="load-from-selected-device2">Load from device</button>
@@ -31,7 +31,7 @@
             <textarea admin-only id="presetcode" cols="60" rows="5">{"a":3}</textarea>
         </div>
 
-        <div id="layers" class="grid">
+        <div id="layers" class="grid" admin-only>
             <button id="layer1" onclick="document.body.setAttribute('active-layer',this.id)">
                 <span>1</span>
             </button>
@@ -44,6 +44,12 @@
             <button id="layer4" onclick="document.body.setAttribute('active-layer',this.id)">
                 <span>4</span>
             </button>
+        </div>
+
+        <div id="layers" class="grid">
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
         </div>
 
         <div id="settings">
@@ -128,7 +134,7 @@
                         <input type="range" value="0" id="layer4-opacity" />
                     </td>
                 </tr>
-                <tr admin-only>
+                <tr>
                     <td>
                         <input type="range" value="0" id="layer1-speed" />
                     </td>
@@ -142,7 +148,7 @@
                         <input type="range" value="0" id="layer4-speed" />
                     </td>
                 </tr>
-                <tr admin-only>
+                <tr>
                     <td>
                         <input type="range" value="0" id="layer1-offset" />
                     </td>
@@ -156,7 +162,7 @@
                         <input type="range" value="0" id="layer4-offset" />
                     </td>
                 </tr>
-                <tr admin-only>
+                <tr>
                     <td>
                         <input type="range" value="0" id="layer1-repeat" />
                     </td>
@@ -170,7 +176,7 @@
                         <input type="range" value="0" id="layer4-repeat" />
                     </td>
                 </tr>
-                <tr admin-only>
+                <tr>
                     <td>
                         <input type="range" value="0" id="layer1-size" />
                     </td>
