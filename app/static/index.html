@@ -23,15 +23,7 @@
 
         <div id="devices" class="grid"></div>
 
-        <div id="presets" class="grid" admin-only>
-            <select id="all-presets"></select>
-            <button id="save-preset">Save settings</button>
-            <button admin-only id="load-from-preset">Load from textbox</button>
-            <button id="send-all-props">Send all props</button>
-            <textarea admin-only id="presetcode" cols="60" rows="5">{"a":3}</textarea>
-        </div>
-
-        <div id="layers" class="grid" admin-only>
+        <div id="layers" class="grid">
             <button id="layer1" onclick="document.body.setAttribute('active-layer',this.id)">
                 <span>1</span>
             </button>
@@ -44,12 +36,6 @@
             <button id="layer4" onclick="document.body.setAttribute('active-layer',this.id)">
                 <span>4</span>
             </button>
-        </div>
-
-        <div id="layers" class="grid">
-            <span>1</span>
-            <span>2</span>
-            <span>3</span>
         </div>
 
         <div id="settings">
@@ -190,7 +176,7 @@
                         <input type="range" value="0" id="layer4-size" />
                     </td>
                 </tr>
-                <tr admin-only>
+                <tr>
                     <td>
                         <input type="range" value="0" id="layer1-feather1" />
                     </td>
@@ -204,7 +190,7 @@
                         <input type="range" value="0" id="layer4-feather1" />
                     </td>
                 </tr>
-                <tr admin-only>
+                <tr>
                     <td>
                         <input type="range" value="0" id="layer1-feather2" />
                     </td>
@@ -219,6 +205,14 @@
                     </td>
                 </tr>
             </table>
+        </div>
+
+        <div id="presets" class="grid">
+            <select id="all-presets"></select>
+            <button id="save-preset">Save settings</button>
+            <button admin-only id="load-from-preset">Load from textbox</button>
+            <button id="send-all-props">Send all props</button>
+            <textarea admin-only id="presetcode" cols="60" rows="5">{"a":3}</textarea>
         </div>
     </body>
 </html>

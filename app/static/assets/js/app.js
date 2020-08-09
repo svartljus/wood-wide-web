@@ -155,18 +155,20 @@ function updateFixtureLists() {
             inp.name = 'devices'
             inp.checked = true
             inp.addEventListener('change', updateSelectedFixtures)
-            inp.addEventListener('change', loadFromSelectedDevice)
+            // inp.addEventListener('change', loadFromSelectedDevice)
+            div.setAttribute('data-device', f.id)
             div.appendChild(inp)
             div.appendChild(lab)
             el.appendChild(div)
         })
         var clone = el.childNodes[0].cloneNode(true)
         clone.querySelector('input').id = 'all-devices'
+        clone.removeAttribute('data-device')
         clone.querySelector('input').checked = true
         clone.querySelector('label').textContent = 'alla'
         clone.querySelector('label').setAttribute('for', 'all-devices')
-        // el.insertBefore(clone, el.childNodes[0])
-        el.appendChild(clone)
+        el.insertBefore(clone, el.childNodes[0])
+        // el.appendChild(clone)
         // clone.style.display = 'none'
     }
 }
@@ -322,6 +324,7 @@ window.addEventListener('load', () => {
         const span = document.createElement('span')
         const range = c.range || [0, 100]
         const value = c.default !== undefined ? c.default : 0.5
+        const id = c.id.substring(0, c.id.indexOf('-'))
         inp.min = range[0]
         inp.max = range[1]
         inp.value = value * (range[0] + range[1])
@@ -329,7 +332,8 @@ window.addEventListener('load', () => {
         inp.oninput = () => {
             // let a = inp.value
             let a = Math.round((inp.value / inp.max) * 100)
-            inp.style.background = `linear-gradient(to right,var(--slider-color),var(--slider-color) ${a}%,#eee ${a}%)`
+
+            inp.style.background = `linear-gradient(to right,var(--${id}-color),var(--${id}-color) ${a}%,#eee ${a}%)`
         }
 
         inp.oninput()

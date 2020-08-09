@@ -139,16 +139,16 @@ io.on('connection', function (socket) {
 
 // Create some mock fixtures if you dont have any actual lights
 
-fixtureDiscovery.addMockFixture(new Fixture('Träd 1', '192.168.2.10'))
-fixtureDiscovery.addMockFixture(new Fixture('Träd 2', '192.168.2.11'))
-fixtureDiscovery.addMockFixture(new Fixture('Träd 3', '192.168.2.12'))
-fixtureDiscovery.addMockFixture(new Fixture('Träd 4', '192.168.2.13'))
-fixtureDiscovery.addMockFixture(new Fixture('Träd 5', '192.168.2.14'))
-fixtureDiscovery.addMockFixture(new Fixture('Träd 6', '192.168.2.15'))
-fixtureDiscovery.addMockFixture(new Fixture('Träd 7', '192.168.2.16'))
-fixtureDiscovery.addMockFixture(new Fixture('Träd 8', '192.168.2.17'))
-fixtureDiscovery.addMockFixture(new Fixture('Träd 9', '192.168.2.18'))
-fixtureDiscovery.addMockFixture(new Fixture('Träd 10', '192.168.2.19'))
+fixtureDiscovery.addMockFixture(new Fixture('Träd 1', '192.168.1.10'))
+fixtureDiscovery.addMockFixture(new Fixture('Träd 2', '192.168.1.11'))
+fixtureDiscovery.addMockFixture(new Fixture('Träd 3', '192.168.1.12'))
+fixtureDiscovery.addMockFixture(new Fixture('Träd 4', '192.168.1.13'))
+fixtureDiscovery.addMockFixture(new Fixture('Träd 5', '192.168.1.14'))
+fixtureDiscovery.addMockFixture(new Fixture('Träd 6', '192.168.1.15'))
+fixtureDiscovery.addMockFixture(new Fixture('Träd 7', '192.168.1.16'))
+fixtureDiscovery.addMockFixture(new Fixture('Träd 8', '192.168.1.17'))
+fixtureDiscovery.addMockFixture(new Fixture('Träd 9', '192.168.1.18'))
+fixtureDiscovery.addMockFixture(new Fixture('Träd 10', '192.168.1.19'))
 
 oscSender.fixtureDiscovery = fixtureDiscovery
 

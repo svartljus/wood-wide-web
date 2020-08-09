@@ -15,3 +15,7 @@
 #devices input:checked ~ label {
     background-color: darkgray;
 }
+
+html:not(#admin) #devices div[data-device^='esp'] {
+    display: none;
+}

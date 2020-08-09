@@ -13,9 +13,13 @@ tr {
     display: flex;
     display: grid;
     /* padding: 0.25rem 0; */
-    box-sizing: border-box;
     grid-template-columns: 1fr 1fr 1fr;
+    box-sizing: border-box;
     grid-column-gap: 0.5rem;
+}
+
+html#admin tr {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
 tr:not(:last-child) {
@@ -40,9 +44,13 @@ td,
     display: flex;
 }
 
-#layer4,
-tr:nth-child(n + 3) td:nth-child(4) {
+html:not(#admin) #layer4,
+html:not(#admin) tr:nth-child(n + 3) td:nth-child(4) {
     display: none !important;
+}
+
+html:not(#admin) td span {
+    display: none;
 }
 
 td div {

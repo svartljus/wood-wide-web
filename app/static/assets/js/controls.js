@@ -24,26 +24,22 @@ const CONTROLS = [
 
     {
         id: 'layer1-red',
-        prop: 'layer1/red',
-        default: 1
+        prop: 'layer1/red'
     },
 
     {
         id: 'layer2-red',
-        prop: 'layer2/red',
-        default: 1
+        prop: 'layer2/red'
     },
 
     {
         id: 'layer3-red',
-        prop: 'layer3/red',
-        default: 1
+        prop: 'layer3/red'
     },
 
     {
         id: 'layer4-red',
-        prop: 'layer4/red',
-        default: 1
+        prop: 'layer4/red'
     },
 
     {
@@ -184,25 +180,25 @@ const CONTROLS = [
     {
         id: 'layer1-repeat',
         prop: 'layer1/repeat',
-        range: [1, 20],
+        range: [1, 10],
         formatter: multiplierFormatter
     },
     {
         id: 'layer2-repeat',
         prop: 'layer2/repeat',
-        range: [1, 20],
+        range: [1, 10],
         formatter: multiplierFormatter
     },
     {
         id: 'layer3-repeat',
         prop: 'layer3/repeat',
-        range: [1, 20],
+        range: [1, 10],
         formatter: multiplierFormatter
     },
     {
         id: 'layer4-repeat',
         prop: 'layer4/repeat',
-        range: [1, 20],
+        range: [1, 10],
         formatter: multiplierFormatter
     },
 
